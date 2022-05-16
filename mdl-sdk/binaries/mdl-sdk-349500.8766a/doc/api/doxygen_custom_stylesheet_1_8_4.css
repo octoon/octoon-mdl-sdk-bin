@@ -1,0 +1,866 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,400;0,600;1,400&display=swap');
+
+
+html, body {
+    font-size: 100%;
+}
+
+h1, h2, h3, h4 {
+    font-family: source_sans_pro,Geneva,Verdana,Helvetica,Arial,sans-serif
+}
+
+h1 {
+    font-size: 1.5em;
+}
+
+h2 {
+    font-size: 1.3em;
+}
+
+h3 {
+    font-size: 1.1em;
+}
+
+.roman {
+    font-family:libre_baskerville, serif;
+}
+
+#titlelink {
+    font-weight : bold; 
+    font-family: source_sans_pro,sans_serif;
+    color: #000000;
+}
+
+#MSearchField {
+    font-family: source_sans_pro,sans_serif;
+}
+
+#titlearea {
+    padding-top: 2em;
+    padding-bottom: .8em;
+    border-style: none;
+/*
+    line-height: 1em;
+*/
+}
+
+#top {
+    padding-bottom: 8px;
+    border-bottom-style: solid;
+    border-bottom-width: 2px;
+    border-bottom-color: #AAAAAA;
+}
+
+#projectname {
+    padding-left: 18px;
+}
+
+#projectlogo {
+    float: right;
+    padding-right: 20px;
+    vertical-align: middle;
+    width: 200px;
+}
+
+img {
+    padding: 0;
+    margin: 0;
+}
+
+#blackheader img {
+    float: right;
+    padding-top: 0.5em;
+}	    
+
+div.image div.caption {
+    font-weight: normal;
+    font-style: italic;
+    margin: 8px 12px 24px 12px;
+}
+
+
+#nav-tree * a {
+    font-family: source_sans_pro,sans_serif;
+    font-weight: normal;
+}
+
+
+#nav-tree {
+    background-color: #EFEFEF;
+    background-image: none;
+    border: 0px;
+    padding: 0px;
+    line-height: 1.4;
+}
+
+#nav-tree * img {
+    height: 16px;
+}    
+
+
+td.entry a.el {
+    /*font-weight: bold;*/
+    color: #10467f;
+    text-shadow: none;
+    font-family: 'Source Code Pro',Courier,monospace;
+}
+
+td.entry a.el:visited {
+    /*font-weight: bold;*/
+    color: #10467f;
+    text-shadow: none;
+    font-family: 'Source Code Pro',Courier,monospace;
+}
+
+td.entry a[href*="group__"] {
+    font-family: libre_baskerville,serif;
+}
+
+
+/*
+table.directory tbody tr td.entry a.el {
+    font-family: libre_baskerville,serif;
+}
+*/
+
+
+div.item {
+    border: none;
+    border-bottom: 1px solid #FFFFFF;
+}
+
+.tabs, .tabs1, .tabs2, .tabs3 {
+    font-family: source_sans_pro,sans_serif;
+}
+
+.tabs2, .tabs3 {
+}
+
+h1, h2, h3, h4, h5, h6,
+h1.glow, h2.glow, h3.glow, h4.glow, h5.glow, h6.glow {
+    /* Puh-LEEZ. */
+    text-shadow: none;
+}
+
+div.line.glow {
+    box-shadow: none;
+}
+
+.memberdecls td.glow, .fieldtable tr.glow {
+	box-shadow: none;
+}
+
+.memitem.glow {
+    box-shadow: none;
+}
+
+
+#navrow1, #navrow2, #navrow3, #navrow4 {
+    background-image: none;
+    border-style: none;
+}
+
+#navrow1 {
+    padding-top: 1em;
+}
+
+ul.tablist:first-child {
+    margin-left: 16px;
+}
+
+div#top {
+    padding-bottom: 1em;
+}
+
+
+.tablist li {
+    line-height: 1.8;
+    background-image: none;
+    background-color: #DDDDDD;
+    border-color: #FFFFFF;
+    border-style: solid;
+    border-width: 2px 0px 2px 4px;
+}
+
+.tablist a {
+    background-image: none;
+    text-shadow: none;
+    color: #000000;
+}
+
+.tablist li a:hover {
+    background-image: none;
+    background-color: #A8B8D9;
+    color: #000000;
+    text-shadow: none;
+}
+
+.tablist li.current a {
+    background-image: none;
+/*    background-repeat: none; */
+    /* background-color: rgb(126,138,162); */
+    background-color: #A8B8D9;
+/*    color: #FFFFFF; */
+    text-shadow: none;
+}
+
+
+.tablist a {
+    font-weight: normal;
+}
+
+
+
+div.headertitle {
+    background-image: none;
+    background-color: #FFFFFF;
+    padding: 0 0 0 10px;
+}
+
+div.header {
+    background-color: #FFFFFF;
+}
+
+.title {
+    font-family: source_sans_pro,sans-serif;
+}
+
+
+#nav-tree .selected {
+    background-image: none;
+    background-color: #A8B8D9;
+    text-shadow: none;
+}
+
+#nav-tree .selected a {
+    color: #000000;
+}
+
+
+.navpath li.navelem a:hover
+{
+    background-color: #6884BD;
+    text-shadow: none;
+    color: #000000;
+}
+
+.tabsearch {
+    background-image: none;
+}
+
+.memproto, dl.reflist dt, .memdoc, dl.reflist dd,
+.memname,
+a[href*="#"],
+a[href*="__"],
+a[href^="struct"],
+a[href^="class"],
+a[href^="namespace"],
+a[title],
+a[href*="classmi_"],
+a[href*="structmi_"],
+a[href*="namespacemi_"],
+td.memItemLeft,
+td.paramname,
+table.params tr td.paramname,
+td.paramtype,
+td.memItemRight, td.memTemplItemLeft,
+table.memname tr td,
+div.fragment,
+h3
+{
+    font-family: 'Source Code Pro',Courier,monospace;
+    font-weight: normal;
+}
+
+
+a[href^="group__"][href$="html"] {
+    font-family: libre_baskerville,serif;    
+}
+
+/*
+a[href~="#"] {
+    font-family: 'Source Code Pro',Courier,monospace;
+}
+*/
+
+.memproto, dl.reflist dt, .memdoc, dl.reflist dd {
+    background-image: none;
+    background-color: white;
+    box-shadow: none;
+    text-shadow: none;
+    border: none;
+}
+
+.memdoc {
+    padding-top: 0px;
+    border-bottom: 1px solid #AAAAAA;
+}
+
+.memproto {
+    padding-bottom: 0px;
+}
+
+.memname {
+    font-weight: normal;
+}
+
+
+/*
+a.el {
+    vertical-align: bottom;
+}
+*/
+
+.ui-resizable-e {
+    background: #AAAAAA;
+    width: 2px;
+    margin:0;
+}
+
+#nav-sync {
+    display: none;
+    visibility: hidden;
+}
+
+div.ah {
+    background-color: white;
+    color: black;
+    background-image: none;
+    box-shadow: none;
+    border: none;
+    margin-bottom: 0px;
+    margin-left: 0px;
+    padding: 0px;
+}
+
+
+.navpath ul {
+    background-image: none;
+    height: 20px;
+    line-height: 20px;
+    margin: 0;
+    padding: 0;
+    background-color: #DDDDDD;
+    text-shadow: none;
+    font-family: source_sans_pro,sans-serif;
+}
+
+li.navelem {
+    background-image: none;
+}
+
+table.fieldtable {
+    box-shadow: none;
+    border-radius: 0px;
+}
+
+.fieldtable th {
+    background-image: none;
+    background-color: white;
+}
+
+span.mlabel {
+    background-color: #EEEEEE;
+    color: black;
+    border-radius: 0px;
+    border-color: #AAAAAA;
+}
+
+#MSearchBox {
+    margin-top: 2px;
+    margin-right: 10px;
+    height: 1.5em;
+    font-size: 1em;
+}
+
+div.fragment {
+    padding: 1em;
+    margin-top: .75em;
+    margin-bottom: .75em;
+}
+
+div.fragment div.line {
+    margin-top : 3px;
+    margin-bottom : 3px;
+}
+    
+/* Flip red and green in the source code listings so that comments are
+   green like the programmer's manual. */
+
+div.line span.comment {
+    color: #116600;
+}
+
+div.line span.keyword {
+    color: #800000;
+}
+
+
+/* The "includes_table" class was added to the Doxygen output in method
+ v184_modify() in file doxygen.py: */
+
+.includes_table {
+    border-collapse: collapse;
+    margin-bottom: 1em;
+}
+
+.includes_table th {
+    border: 1px solid #AAAAAA;
+    background-color: #DDDDDD;
+}
+
+.includes_table td {
+    background-color: white;
+}
+
+.bindertarget, a:hover.bindertarget {
+    text-decoration: none;
+    color: black;
+}
+
+
+table.memberdecls tr td { 
+    padding: .25em 0 .25em 0;
+}
+
+table.memberdecls tr td.memSeparator {
+    padding: 0;
+}
+
+dl dt {
+    padding: 0 .5em 0 0;
+}
+
+
+/*
+p,
+.ingroups, .see,
+td.mdescLeft, td.mdescRight,
+.textblock, th, .indexvalue, .entry, .desc, dl.section, .mlabel, div.summary, div.summary a,
+.ah, .qindex, a.qindex,
+a[href*="#details"],
+table.params,
+td,
+dl.params dt,
+div.levels,
+td.memdescRight a, td.mdescRight a,
+dl.section.see dd a, div.memdoc
+{
+    font-family: libre_baskerville,serif;
+}
+*/
+
+    
+dl.section.see dt {
+    padding: .25em 0 .25em 0;
+}
+
+
+dl.section.user dd {
+    padding: .5em 0 .5em 0;
+}
+
+
+div.textblock ul li, div.textblock ul li {
+    vertical-align: bottom;
+}
+
+
+div.summary {
+    padding: .5em 2em 0em 0em;
+}
+
+.mlabel {
+    font-style: italic;
+}
+
+div.title span.mlabel {
+    font-weight: normal;
+}
+
+.ah, .qindex, a.qindex {
+    font-weight: bold;
+}
+
+a.el {
+    font-weight: normal;
+}
+
+
+.params .paramname, .retval .paramname {
+    font-weight: normal;
+}
+
+td.paramname {
+    padding: 0em 1em;
+}
+
+div.memtemplate {
+    padding: 0 0 .5em 0;
+}
+
+div.memproto {
+    padding: 0 0 0 0;
+}
+
+a.hover {
+    text-decoration: none;
+}
+
+table.memname tr td {
+    padding: 0px;
+}
+
+
+div.title {
+    line-height: 1.4;
+}
+
+
+
+ul.tablist li a span {
+    line-height: 1.8;
+}
+
+div.memdoc {
+    padding-top: 0px;
+    padding-bottom: 0px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+div.memdoc {
+    font-family: libre_baskerville,serif;
+}
+
+tr.memdesc td.mdescRight {
+    padding: 0 0 1em 0;
+}
+
+div.textblock ul li {
+    padding-bottom: .2em; 
+}
+
+div.title {
+    font-size: 1.4em;
+}
+
+a#titlelink {
+    font-size: 1.7em;
+}
+
+div.ingroups a.el {
+    font-size: .8em;
+}
+
+span.mlabel {
+    font-size: .7em;
+}
+
+div.summary {
+    font-size: .9em;
+}
+
+.top_page_nav { font-family: source_sans_pro,sans-serif; font-size: 1.5em; font-style: italic;
+                float: right; padding-right: 1em; color: #224488; }
+
+tt, code {
+    font-family: 'Source Code Pro',Courier,monospace;
+}
+
+.monospace {
+    font-family: 'Source Code Pro',Courier,monospace;
+}
+
+
+a.serif {
+    font-family: libre_baskerville,serif;
+}
+
+a.blue a.blue:visited {
+    color: #10467f;
+}
+
+.contents {
+    font-family: libre_baskerville,serif;
+    line-height: 1.4;
+}
+
+.fragment {
+    line-height: 1.4;    
+}
+
+dl.reflist dd {
+    font-family: libre_baskerville,serif;
+    line-height: 1.4;
+}
+    
+
+.dynheader {
+    font-family: libre_baskerville,serif;
+}    
+
+.center img {
+    padding-top: 12px;
+    padding-bottom: 12px;
+}
+
+/*
+li {
+    font-family: 'Source Code Pro',Courier,monospace;
+}
+*/
+
+
+
+h3, ul.tablist li {
+    font-family: source_sans_pro,sans-serif;
+    font-size: 1.0em;
+}
+
+ul.tablist li a {
+    font-family: source_sans_pro,sans-serif;
+    font-size: 1.0em;
+}    
+
+td.entry a.module {
+    font-family: libre_baskerville,serif;
+}
+
+table.memberdecls {
+    font-family: 'Source Code Pro',Courier,monospace;
+    font-size: 1.0em;
+}
+
+td.mdescRight {
+    font-family: libre_baskerville,serif;
+    font-size: 1.0em;
+}
+
+a[href="#details"] {
+    font-family: libre_baskerville,serif;
+    font-style: italic;
+}
+
+div.summary a {
+    font-family: source_sans_pro,Geneva,Verdana,Helvetica,Arial,sans-serif
+}
+
+td.fieldname {
+    font-family: 'Source Code Pro',Courier,monospace;
+    font-size: 1.0em;
+    font-style: normal;
+}    
+
+h3 {
+    font-family: 'Source Code Pro',Courier,monospace;
+    font-size: 1.1em;
+    font-style: normal;
+}
+
+div.groupHeader {
+    font-family: source_sans_pro,Geneva,Verdana,Helvetica,Arial,sans-serif;
+    font-size: 1.2em;
+}
+
+div.groupText {
+    font-family: libre_baskerville,serif;
+    font-style: normal;
+}
+
+
+/*
+a.plain a.plain:visited {
+    color: #10467f;
+    font-family: libre_baskerville,serif;
+    font-weight: normal;
+    text-decoration: none;
+}
+*/
+
+a, a:visited, a.el, a.el:visited {
+    color: #10467f;
+}
+
+/*
+ul.tablist li.current a, ul.tablist li.current a:visited {
+    color: #FFFFFF;
+}
+*/
+
+ul.tablist li a, ul.tablist li a:visited {
+    color: #000000;
+}
+
+
+
+span.label a, span.label a:visited {
+    color: #000000;
+}    
+
+a.plain, a.plain:visited {
+    font-family: libre_baskerville,serif;
+    font-weight: normal;
+    color: #10467f;
+    text-decoration: none;
+}
+
+table.directory a.plain, table.directory a.plain:visited {
+    font-family: libre_baskerville,serif;
+    font-weight: normal;
+    color: #10467f;
+    text-decoration: none;
+}
+
+a[href^="mi_math_"], a[href^="mi_base"] {
+    font-family: libre_baskerville,serif;
+    font-weight: normal;
+    color: #10467f;
+}    
+
+.morelink {
+    font-family: libre_baskerville,serif;
+    font-style: italic;
+    font-size: 95%;
+    color: #10467f;    
+}
+    
+contents ul li {
+    font-family: 'Source Code Pro',Courier,monospace;
+}
+
+/*
+p a[href*="#details"] {
+    font-family: libre_baskerville,serif;
+}
+*/
+
+.box {
+    border: 1px solid black;
+    padding: 5px 10px 5px 10px;
+}
+
+#blackheader {
+  font-family: source_sans_pro;
+  color: white;    
+  padding: 0 1em;
+  margin: 0;
+  border: 0;
+  vertical-align: middle;
+  font-size: 1.5em;
+  height: 2.5em;
+  overflow: hidden;
+}
+
+#logos {
+  line-height: 2.2;
+}  
+
+#blackheader_title {
+  line-height: 2.4;
+}            
+
+#blackheader, #nav-path {
+/*  background-color: rgb(4.5%,7.2%,1.1%); 
+    background-color: rgb(9.1%,14.2%,2.1%); */ 
+    background-color: black;
+}
+
+
+#blackheader_uplink a {
+    color: white;
+    float: right;
+    font-size: .7em;
+    font-style: italic;
+    padding-right: 1em;
+    vertical-align: middle;
+    line-height: 3.65;
+}
+
+
+#blackheader span {
+    display: inline;
+    vertical-align: middle;
+}
+
+/*
+#blackheader span img {
+    padding-top: .625em; 
+    padding-left: 1em;
+    float:right;
+}
+*/
+
+/*
+#blackheader img {
+    padding-left: 1em;
+    float:right;
+    display: inline-block;
+    vertical-align: middle;
+}
+*/
+
+#logos img {
+    vertical-align: middle;    
+    padding-left: .5em;
+}
+
+#logos {
+    padding-left: .5em;
+    display: inline-block;
+    height: 2.5em;
+    float: right;
+}
+
+
+.inline {
+    display: inline;
+}
+
+.nomargin {
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+.floatright {
+    float: right;
+}
+
+
+#headerlogo_left img {
+    padding: .3em 1.5em 0 .5em;
+}
+
+
+#headerlogo_right {
+    height: 2.5em;
+    float: right;
+}
+
+
+
+#nav-path {
+box-sizing: border-box;
+  font-family: source_sans_pro;
+  color: white;    
+  padding: .8em 0;
+  margin: 0;
+  font-size: .8em;
+  text-align: center;
+}
+
+#nav-path a {
+    color: #BBBBFF;
+}
+
+.footeritem {
+  padding: 0 .75em;
+  display: inline-block;
+}	     
+
+
+.rightjustify img {
+    padding-left: 30px;
+}
+

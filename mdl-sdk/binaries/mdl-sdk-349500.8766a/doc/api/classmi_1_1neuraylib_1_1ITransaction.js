@@ -1,0 +1,25 @@
+var classmi_1_1neuraylib_1_1ITransaction =
+[
+    [ "abort", "classmi_1_1neuraylib_1_1ITransaction.html#a3e37d6996122404fc0a47bc39190d64a", null ],
+    [ "access", "classmi_1_1neuraylib_1_1ITransaction.html#adafe2621ae719c43076b79a5677b4934", null ],
+    [ "access", "classmi_1_1neuraylib_1_1ITransaction.html#a3b3e21201f4a43bccd5d842dae34e16e", null ],
+    [ "commit", "classmi_1_1neuraylib_1_1ITransaction.html#aa4ff8152107db238986b364273bceb0c", null ],
+    [ "copy", "classmi_1_1neuraylib_1_1ITransaction.html#a0c19e2739eb47e51386aff339be2ee09", null ],
+    [ "create", "classmi_1_1neuraylib_1_1ITransaction.html#ad1b8ce71d7a6fea1f59573325dba126c", null ],
+    [ "create", "classmi_1_1neuraylib_1_1ITransaction.html#a87d9ca3eeebb1b34a55e765de72751c6", null ],
+    [ "create", "classmi_1_1neuraylib_1_1ITransaction.html#abf3b188c45023f86faf2b831d7bf9b9c", null ],
+    [ "edit", "classmi_1_1neuraylib_1_1ITransaction.html#a35971d023789574ee31dd05768fc7fe1", null ],
+    [ "edit", "classmi_1_1neuraylib_1_1ITransaction.html#a986e4b2b958009fa43c679214939bfa4", null ],
+    [ "get_id", "classmi_1_1neuraylib_1_1ITransaction.html#a691790207395f02b1487e6f98f4a7c11", null ],
+    [ "get_privacy_level", "classmi_1_1neuraylib_1_1ITransaction.html#aecf6962667197b0806c1bf9c9964a765", null ],
+    [ "get_scope", "classmi_1_1neuraylib_1_1ITransaction.html#ab94f31ed9390cec1144c01a8347c0072", null ],
+    [ "get_time_stamp", "classmi_1_1neuraylib_1_1ITransaction.html#a35439dc05ea91a5f6f67b261f1357062", null ],
+    [ "get_time_stamp", "classmi_1_1neuraylib_1_1ITransaction.html#a885bf28a2ceb2efb079414fe1ea1e73d", null ],
+    [ "has_changed_since_time_stamp", "classmi_1_1neuraylib_1_1ITransaction.html#a5d6461ac4d7be4211d107ad57a6869ca", null ],
+    [ "is_open", "classmi_1_1neuraylib_1_1ITransaction.html#a2166710b6da32edf42b89d1aace235e1", null ],
+    [ "list_elements", "classmi_1_1neuraylib_1_1ITransaction.html#a470eb1b7674345c4669bd9faff1029d3", null ],
+    [ "name_of", "classmi_1_1neuraylib_1_1ITransaction.html#a0db9733124735032153593b1a6710ebb", null ],
+    [ "remove", "classmi_1_1neuraylib_1_1ITransaction.html#a97632e9e40741b788c8c7ef599555789", null ],
+    [ "store", "classmi_1_1neuraylib_1_1ITransaction.html#ae1c0cccf93ff990b7af8d0d0379f7c09", null ],
+    [ "LOCAL_SCOPE", "classmi_1_1neuraylib_1_1ITransaction.html#a59e2e7bc4226fffe5dabec10d13fe8a9", null ]
+];

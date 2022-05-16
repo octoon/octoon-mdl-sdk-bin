@@ -1,0 +1,13 @@
+{
+	"name": "jquery-ui",
+	"title": "jQuery UI (custom)",
+	"description": "A custom version of JQuery UI",
+	"version": "1.12.1.custom",
+	"author": {},
+	"maintainers": [],
+	"repository": {},
+	"scripts": {},
+	"dependencies": {},
+	"devDependencies": {},
+	"keywords": []
+}

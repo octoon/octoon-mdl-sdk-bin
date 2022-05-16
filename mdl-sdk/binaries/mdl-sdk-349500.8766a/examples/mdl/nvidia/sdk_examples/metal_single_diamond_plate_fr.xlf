@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:trolltech="urn:trolltech:names:ts:document:1.0">
+    <file original="" datatype="plaintext" source-language="en" target-language="fr">
+        <body>
+            <trans-unit id="0">
+                <source xml:space="preserve">Copyright 2022 NVIDIA Corporation. All rights reserved.</source>
+                <target xml:space="preserve">Copyright 2022 NVIDIA Corporation. Tous droits réservés.</target>
+                <note from="translator">::anno::copyright_notice(string) single_diamond_plate</note>
+            </trans-unit>
+            <trans-unit id="1">
+                <source xml:space="preserve">NVIDIA Corporation</source>
+                <target xml:space="preserve">NVIDIA Corporation</target>
+                <note from="translator">::anno::author(string) single_diamond_plate</note>
+            </trans-unit>
+            <trans-unit id="2">
+                <source xml:space="preserve">Metal Diamond Plate</source>
+                <target xml:space="preserve">Tôle larmée</target>
+                <note from="translator">::anno::display_name(string) single_diamond_plate</note>
+            </trans-unit>
+            <trans-unit id="3">
+                <source xml:space="preserve">Metal Color</source>
+                <target xml:space="preserve">Couleur du métal</target>
+                <note from="translator">::anno::display_name(string) single_diamond_plate</note>
+            </trans-unit>
+            <trans-unit id="4">
+                <source xml:space="preserve">The reflection color of the metal</source>
+                <target xml:space="preserve">Couleur de réflexion du métal</target>
+                <note from="translator">::anno::description(string) single_diamond_plate</note>
+            </trans-unit>
+            <trans-unit id="5">
+                <source xml:space="preserve">Appearance</source>
+                <target xml:space="preserve">Apparence</target>
+                <note from="translator">::anno::in_group(string) single_diamond_plate
+::anno::in_group(string) single_diamond_plate
+::anno::in_group(string) single_diamond_plate
+::anno::in_group(string) single_diamond_plate
+::anno::in_group(string) single_diamond_plate</note>
+            </trans-unit>
+            <trans-unit id="6">
+                <source xml:space="preserve">Bump Strength</source>
+                <target xml:space="preserve">Intensité du bump</target>
+                <note from="translator">::anno::display_name(string) single_diamond_plate</note>
+            </trans-unit>
+            <trans-unit id="7">
+                <source xml:space="preserve">The strength of the bumpmap of the diamond pattern</source>
+                <target xml:space="preserve">Intensité du bumpmap du motif en losange</target>
+                <note from="translator">::anno::description(string) single_diamond_plate</note>
+            </trans-unit>
+            <trans-unit id="8">
+                <source xml:space="preserve">Brushing Bump Strength</source>
+                <target xml:space="preserve">Intensité du bump du brossage</target>
+                <note from="translator">::anno::display_name(string) single_diamond_plate</note>
+            </trans-unit>
+            <trans-unit id="9">
+                <source xml:space="preserve">The strength of the brushing as part of the manufacturing process</source>
+                <target xml:space="preserve">Intensité du brossage du processus de fabrication</target>
+                <note from="translator">::anno::description(string) single_diamond_plate</note>
+            </trans-unit>
+            <trans-unit id="10">
+                <source xml:space="preserve">Detail Bump Strength</source>
+                <target xml:space="preserve">Intensité du bump de détail</target>
+                <note from="translator">::anno::display_name(string) single_diamond_plate</note>
+            </trans-unit>
+            <trans-unit id="11">
+                <source xml:space="preserve">The strength of the detail bump map that creates impurities in the bump map</source>
+                <target xml:space="preserve">La force du bump de détail qui crée des impuretés dans le bumpmap</target>
+                <note from="translator">::anno::description(string) single_diamond_plate</note>
+            </trans-unit>
+            <trans-unit id="12">
+                <source xml:space="preserve">Metal Roughness</source>
+                <target xml:space="preserve">Rugosité du métal</target>
+                <note from="translator">::anno::display_name(string) single_diamond_plate</note>
+            </trans-unit>
+            <trans-unit id="13">
+                <source xml:space="preserve">The overall roughness of the metal</source>
+                <target xml:space="preserve">Rugosité globale du métal</target>
+                <note from="translator">::anno::description(string) single_diamond_plate</note>
+            </trans-unit>
+            <trans-unit id="14">
+                <source xml:space="preserve">Translate</source>
+                <target xml:space="preserve">Translation</target>
+                <note from="translator">::anno::display_name(string) single_diamond_plate</note>
+            </trans-unit>
+            <trans-unit id="15">
+                <source xml:space="preserve">Controls the position of the texture</source>
+                <target xml:space="preserve">Contrôle la position de la texture</target>
+                <note from="translator">::anno::description(string) single_diamond_plate</note>
+            </trans-unit>
+            <trans-unit id="16">
+                <source xml:space="preserve">Transform</source>
+                <target xml:space="preserve">Transformation</target>
+                <note from="translator">::anno::in_group(string) single_diamond_plate
+::anno::in_group(string) single_diamond_plate
+::anno::in_group(string) single_diamond_plate</note>
+            </trans-unit>
+            <trans-unit id="17">
+                <source xml:space="preserve">Rotate</source>
+                <target xml:space="preserve">Rotation</target>
+                <note from="translator">::anno::display_name(string) single_diamond_plate</note>
+            </trans-unit>
+            <trans-unit id="18">
+                <source xml:space="preserve">Rotate angle of the texture in degrees</source>
+                <target xml:space="preserve">Angle de rotation de la texture en degrés</target>
+                <note from="translator">::anno::description(string) single_diamond_plate</note>
+            </trans-unit>
+            <trans-unit id="19">
+                <source xml:space="preserve">Scale</source>
+                <target xml:space="preserve">Échelle</target>
+                <note from="translator">::anno::display_name(string) single_diamond_plate</note>
+            </trans-unit>
+            <trans-unit id="20">
+                <source xml:space="preserve">Larger numbers increase the size</source>
+                <target xml:space="preserve">Une valeur elevée augmente la taille</target>
+                <note from="translator">::anno::description(string) single_diamond_plate</note>
+            </trans-unit>
+            <trans-unit id="21">
+                <source xml:space="preserve">UV Space Index</source>
+                <target xml:space="preserve">Indice d'espace UV</target>
+                <note from="translator">::anno::display_name(string) single_diamond_plate
+::anno::description(string) single_diamond_plate</note>
+            </trans-unit>
+            <trans-unit id="22">
+                <source xml:space="preserve">Advanced</source>
+                <target xml:space="preserve">Avancé</target>
+                <note from="translator">::anno::in_group(string) single_diamond_plate</note>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

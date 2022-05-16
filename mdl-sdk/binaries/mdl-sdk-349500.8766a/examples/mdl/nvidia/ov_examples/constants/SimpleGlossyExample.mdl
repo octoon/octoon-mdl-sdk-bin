@@ -1,0 +1,32 @@
+mdl 1.4;
+
+import ::base::*;
+import ::df::*;
+import ::math::*;
+import ::tex::*;
+import ::anno::*;
+import ::state::*;
+import .::SimpleGlossyTarget::*;
+
+
+// complex material we need to bake
+export material SimpleGlossy_Example()
+= let {
+    base::texture_coordinate_info uvw = base::coordinate_source(
+        coordinate_system: base::texture_coordinate_uvw,
+        texture_space: 0
+    );
+
+    // the diffuse value needs to be baked, no question
+    color diffuse = color(math::frac(uvw.position) * 10);
+    
+    // this is folded already to a constant when loading
+    float roughness = math::sin(0.25 * math::PI) * 0.5 + 0.5;
+
+    // this is possible too of course
+    //float roughness = 0.5;
+
+} in SimpleGlossyTarget::Target(
+    tint: diffuse,
+    roughness: roughness
+);

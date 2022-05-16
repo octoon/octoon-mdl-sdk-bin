@@ -1,0 +1,84 @@
+mdl 1.4;
+
+import ::base::*;
+import ::df::*;
+import ::math::*;
+import ::tex::*;
+import ::anno::*;
+import ::state::*;
+using .::baking_annotations import *;
+
+//--------------------------------------------------------------------------------------------------
+// little helper we don't really need
+//--------------------------------------------------------------------------------------------------
+
+color lookup_color_ext(
+    uniform texture_2d texture, 
+    int tex_coord_index = 0,
+    color default_value = color(0.0)
+    )
+{
+    float3 tex_coord = state::texture_coordinate(tex_coord_index);
+    return tex::texture_isvalid(texture)
+        ? tex::lookup_color(texture, float2(tex_coord.x, tex_coord.y))
+        : default_value;
+}
+
+//--------------------------------------------------------------------------------------------------
+// Designed by DriveSim Dev-Team
+//--------------------------------------------------------------------------------------------------
+
+// Two level approach
+// The bottom level is the baking target with float4 parameters that map to render targets
+// No interaction with artists.
+export material TargetXY_Baking(
+    float4 color_roughness = float4(0.0) [[ target_baked_argument("baking_target_0") ]],
+    uniform float some_constant_float = 1.0f [[ ::anno::unused()]], // we do not need to bake uniform variables ...
+    uniform int some_constant_int = 1 [[ ::anno::unused()]]         // ... integration can figure these constants out though
+) 
+[[ target_material_model() ]]
+= material(
+    surface: material_surface(
+        scattering: df::simple_glossy_bsdf(
+            tint: color(color_roughness.x, color_roughness.y, color_roughness.z),
+            roughness_u: color_roughness.w
+        )
+    )
+);
+
+// High level, meant to be used by artists.
+// Parameters are readable, texture lookups for common formats can be attached if required
+export material TargetXY_ForArtist(
+    color tint = color(0.0),
+    float roughness = 0.5,
+    uniform float some_constant_float = 1.0f,
+    uniform int some_constant_int = 1
+) = let
+{
+    float3 tint_f = float3(tint);
+} in TargetXY_Baking(
+    color_roughness: float4(tint_f.x, tint_f.y, tint_f.z, roughness),
+    some_constant_float: some_constant_float,   // just forward constants if we want them in the target
+    some_constant_int: some_constant_int        // just forward constants if we want them in the target
+);
+
+//--------------------------------------------------------------------------------------------------
+// Designed by DriveSim Artists/Content-Team
+//--------------------------------------------------------------------------------------------------
+
+// complex material we need to bake
+export material AsphaltOrConcrete_TargetXY(
+    uniform texture_2d asphalt_texture = texture_2d(),
+    uniform texture_2d concrete_texture = texture_2d()
+)
+= let {
+    float blend_factor = math::sin(state::texture_coordinate(0).x * 10.0f);
+    color asphalt = lookup_color_ext(asphalt_texture, 0, color(0.25f, 0.5f, 0.75f));
+    color concrete = lookup_color_ext(concrete_texture, 0, color(0.75f, 0.0f, 0.75f));
+
+} in TargetXY_ForArtist(
+    tint: math::lerp(asphalt, concrete, blend_factor),
+    roughness: math::sin(blend_factor * 2.0f * math::PI) * 2.0f + 1.0f,
+    some_constant_float: 0.3f,
+    some_constant_int: 42
+);

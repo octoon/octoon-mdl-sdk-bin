@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>
+  <span class="sectionnumber">1</span>Background
+</title>
+</head>
+<body>
+<div id="page">
+
+<h1 id="background" style="clear:both;" class="headerlink"><span class="sectionnumber">1</span>Background</h1>
+
+<p id="1001">Renderers produce images from scene descriptions.
+A scene description consists of three-dimensional geometric objects and their positioning in space.
+Common object representations describe objects by their surface geometry, which sometimes only represent surfaces in space and sometimes represent volumetric objects that are enclosed by the surface description.</p>
+
+<p id="1002">Surfaces and volumes have material properties that determine how they interact with light and, ultimately, how they are rendered in an image.
+Material properties range from the color of surfaces, to their reflection or refraction properties, light emission of surfaces, scattering and absorption properties of volumes, and even to additional geometric properties of surfaces, such as cut-outs, displacements, or bump maps, which are commonly not modeled in the primary geometric description.</p>
+
+<p id="1003">For greatest flexibility, rendering systems often use programming languages to describe material properties.
+These can be general purpose languages, such as C, or domain specific languages, commonly referred to as shading languages, since material authors can program how the actual shading of a surface is computed from material parameters, incoming light, and more.
+Shader programmers can and do go to the extreme of writing full renderers in shader programs.
+However, modern renderers can implement techniques such as multiple importance sampling only if they understand the material properties.
+This analysis is difficult with traditional shading languages, since they define the computation for the shading result itself and not just the material properties.
+Material Definition Language (MDL) is a domain-specific programming language that can define material properties to serve modern renderers in this sense.</p>
+
+<p id="1004">This document gives you a functional overview of MDL.
+The next section provides a quick overview of key features.
+The following sections provide more detail about those features.</p>
+
+
+<h1 id="overview-of-key-mdl-features" style="clear:both;" class="headerlink"><span class="sectionnumber">2</span>Overview of key MDL features</h1>
+
+
+<p id="1005">MDL consists of two major parts:</p>
+
+<ol class="">
+<li>A declarative material definition based on a powerful material model</li>
+<li>A procedural programming language to define functions that can compute values for the parameters of the material model</li>
+</ol>
+
+<p id="1006">The declarative material definition defines what to compute, not how to compute it, while the procedural programming language preserves the infinite flexibility for creative material authors to define material properties with their own programs.</p>
+
+<p id="1007">Key features:</p>
+
+<ul style="list-style-type:square;" class="">
+<li>MDL is independent of rendering algorithms.
+The declarative material definition interfaces with a renderer through the underlying material model, which is purely descriptive in terms of physical material properties and agnostic of any renderer algorithm.</li>
+<li>MDL supports the needs of modern rendering algorithms with a well-defined material model and enough material properties to support path tracing or multiple importance sampling.</li>
+<li>MDL is supported across a series of renderers developed by NVIDIA and it is designed to be extensible and adoptable by other renderers.</li>
+<li>Material definitions in MDL can be parameterized to enable flexible, custom-built domain-specific material libraries.</li>
+<li>MDL has a well-defined module and package concept to support packaging and distribution of material libraries.</li>
+<li>MDL supports the re-use and further customization of additional materials.</li>
+<li>MDL supports the customization of materials with predefined parameter sets, such that a material library for a certain material family can be based on one generic material and various parameter sets for specific instances of that material.
+When such a predefined parameter set is used, it can then still be modified to further adjust the look of the material.</li>
+<li>The renderer state and the standard modules defined by MDL enable material authors to program a wide variety of functions to initialize material parameters, including procedural methods, noise-based textures, texture projection maps, and texture blend pipelines.</li>
+<li>MDL is designed for modern highly-parallel machine architectures.
+The procedural language only allows the definition of pure functions that have access to rendering state and that are free of side effects and global dependencies.
+These functions can therefore be scheduled and executed depending on the needs of the renderer and machine architecture.</li>
+</ul>
+
+<p id="1008">Although it emphasizes physically plausible materials, MDL supports traditional computer graphics techniques that are important in conventional rendering and modeling workflows.
+A MDL material is, in general, applied to a surface and consists of the following properties:</p>
+
+<ul style="list-style-type:square;" class="">
+<li>Surface properties that describe the <i>bidirectional scattering distribution function</i> (BSDF) for reflective and transmissive properties, the <i>emissive distribution function</i> (EDF) for emissive properties and the <i>radiant exitance</i> for the amount of emission.</li>
+<li>A Boolean flag that specifies whether the surface encloses a volume, and thereby defines if the volume properties apply to the enclosed volume or should be ignored.</li>
+<li>Additional surface properties that can be used to define the back-side material for surfaces that do not enclose a volume.</li>
+<li>Volume properties that describe the scattering and absorption coefficients and the <i>volume distribution function</i> (VDF), also known as the <i>volume phase function</i>.</li>
+<li>Geometric properties that describe cut-outs, displacement mapping, and normal mapping.</li>
+<li>BSDF properties that are set to values composed from a fixed set of elemental BSDFs and operators on them.
+These operators can be modifiers for tinting or thin-film effect, or they can be combining functions for a weighted mix or layering of BSDFs including Fresnel effects.
+The layering operator supports an additional normal mapping effect local to the top image.
+These combinators make this a very flexible material model.</li>
+<li>EDF and VDF properties can be composed similar to BSDFs.</li>
+</ul>
+
+
+<h1 id="comparing-mdl-to-shading-languages" style="clear:both;" class="headerlink"><span class="sectionnumber">3</span>Comparing MDL to shading languages</h1>
+
+
+<p id="1009">The use of conventional shading languages can be roughly categorized as follows:</p>
+
+<ol class="">
+<li>They are used to implement functions to describe the spatial distribution of material features &#8212; texture lookups, procedural textures, and projections.</li>
+<li>They are used to provide re-usable building blocks, called <i>shaders</i>, that describe materials with parameters that correspond to material properties, such as the reflective, emissive and transmissive behavior of an object.</li>
+<li>They are used to implement the computations needed in shaders, such as light-material interactions or other algorithmic extensions of the renderer.
+Shaders may even implement full-scale rendering computations, such as volume renderers, particle renderers or complete global illumination solutions.</li>
+</ol>
+
+<p id="1010">While these areas are typically used by different audiences and require different user skills, traditional shading languages do not explicitly distinguish between these use cases.
+MDL clearly separates those domains to address the specific needs of the different audiences.</p>
+
+<p id="1011">In the three numbered areas above, the first corresponds to what MDL offers with its procedural language for implementing functions.
+The second area corresponds to what MDL offers with its material definition and rich, highly configurable material model.
+The third area has no correspondence in MDL and is seen as the domain of the renderer.</p>
+
+
+<h1 id="language-elements-and-re-use" style="clear:both;" class="headerlink"><span class="sectionnumber">4</span>Language elements and re-use</h1>
+
+
+<p id="1012">Functions, materials with their components, and modules are the main language elements that MDL offers for material libraries and re-use.</p>
+
+<p id="1013">Functions can be used individually for the parameters of a renderer, for example, the environment color, or to provide values for material parameters such as a texture lookup for a color parameter for a material.
+Functions can also provide a mechanism for code re-use and data hiding by encapsulating other functions.
+The encapsulated functions can be provided with explicit parameter values within the body of the encapsulating function.
+The resulting function can implemented as a complex calculation with a simpler signature that provides control only for those parameters significant for the intended effect.</p>
+
+<p id="1014">Materials and their BSDF, EDF, and VDF properties are the main building blocks in MDL.
+They can be passed to other materials as parameters, which allows the development of generic materials that re-use aspects of a material and extend or change other aspects.
+For example, a new material could be based on a generic material that takes another material as input and changes it to a thin-walled material by applying the surface properties of the other material on both sides of the surface.</p>
+
+<p id="1015">A material definition can define input parameters that can be used within the material in expressions and function call parameters to initialize properties of the material model or of other already existing materials.
+Parameterizing a material definition enables the encapsulation and customization of materials to create custom material libraries.</p>
+
+<p id="1016">MDL supports the customization of materials with predefined parameter sets, so that a material library for a certain material family can be based on one generic material and various parameter sets for specific instances of that material.
+When such a predefined parameter set is used, it can then still be modified to further adjust the appearance of the material.
+For example, a general metal material can be used with a family of parameter sets to offer a material library of different gold and silver alloys.
+A user can pick a specific material from the library but still modify the final color.</p>
+
+<p id="1017">All files in MDL are defined to be modules.
+They define a namespace and shield identifiers from name clashes, which is useful if material libraries are deployed and used together with other libraries or further in-house material developments.
+Modules can contain materials, functions, and related types and constants.</p>
+
+
+<h1 id="materials" style="clear:both;" class="headerlink"><span class="sectionnumber">5</span>Materials</h1>
+
+
+<p id="1018">MDL provides a purely declarative syntax for describing the interaction of an object with light.
+It relies on predefined building blocks that can be efficiently implemented in a modern renderer, yet are powerful enough to describe a large majority of real-world materials.
+The renderer-side interface of the material, the material model, is represented by a MDL built-in structure-like type, which contains the different properties of the material:</p>
+
+<span id="listing_9.1"></span>
+<div id="1019" class="annotatebox" data-scale="1.0" data-fixed="false"><div id="1020" class="codecaption">Listing 5.1</div><div id="1021" class="annotateline"><div id="1022" class="annotatepad"><pre id="1023" class="uncommented">struct material {
+    uniform bool      thin_walled = false;
+    material_surface  surface     = material_surface();
+    material_surface  backface    = material_surface();
+    uniform color     ior         = color(1.0);
+    material_volume   volume      = material_volume();
+    material_geometry geometry    = material_geometry();
+};
+</pre></div></div></div>
+
+<p id="1024">Depending on the building blocks used, three different kinds of materials can be distinguished:</p>
+
+<ol class="">
+<li>Regular materials describing a surface that separates one volume from another</li>
+<li>Thin-walled materials where the geometry only describes a soap-bubble like shell</li>
+<li>Two-sided materials which also have the thin-walled property, but interact differently with light hitting the geometry from the back side</li>
+</ol>
+
+<p id="1025">The surface, emission, volume, and geometry aspects are also defined by built-in structure-like types:</p>
+
+<span id="listing_9.2"></span>
+<div id="1026" class="annotatebox" data-scale="1.0" data-fixed="false"><div id="1027" class="codecaption">Listing 5.2</div><div id="1028" class="annotateline"><div id="1029" class="annotatepad"><pre id="1030" class="uncommented">struct material_surface {
+    bsdf              scattering = bsdf();
+    material_emission emission   = material_emission();
+};
+</pre></div></div></div>
+
+<span id="listing_9.3"></span>
+<div id="1031" class="annotatebox" data-scale="1.0" data-fixed="false"><div id="1032" class="codecaption">Listing 5.3</div><div id="1033" class="annotateline"><div id="1034" class="annotatepad"><pre id="1035" class="uncommented">struct material_emission {
+    edf            emission  = edf();
+    color          intensity = color(0.0);
+    intensity_mode mode      = intensity_radiant_exitance;
+};
+</pre></div></div></div>
+
+<span id="listing_9.4"></span>
+<div id="1036" class="annotatebox" data-scale="1.0" data-fixed="false"><div id="1037" class="codecaption">Listing 5.4</div><div id="1038" class="annotateline"><div id="1039" class="annotatepad"><pre id="1040" class="uncommented">struct material_volume {
+    vdf   scattering             = vdf();
+    color absorption_coefficient = 0.0;
+    color scattering_coefficient = 0.0;
+};
+</pre></div></div></div>
+
+<span id="listing_9.5"></span>
+<div id="1041" class="annotatebox" data-scale="1.0" data-fixed="false"><div id="1042" class="codecaption">Listing 5.5</div><div id="1043" class="annotateline"><div id="1044" class="annotatepad"><pre id="1045" class="uncommented">struct material_geometry {
+    float3 displacement   = float3(0.0);
+    float  cutout_opacity = 1.0;
+    float3 normal         = state::normal();
+};
+</pre></div></div></div>
+
+<h2 id="elemental-distribution-functions" class="headerlink"><span class="sectionnumber">5.1</span>Elemental distribution functions</h2>
+
+
+<p id="1046">To describe the interaction with light, MDL provides a set of <i>elemental distribution functions</i>.
+The names of the distribution functions end with one of three suffixes:</p>
+
+<div id="1047" class="center">
+<div id="1048" class="tablecontainer" style="margin-top: .25em; margin-bottom: .25em;">
+<table style=" margin: inherit;">
+<tr>
+<td id="1049" class="lhpos tvpos" style="padding:1px 10px;"><span class="monospace">bsdf</span></td>
+<td id="1050" class="lhpos tvpos" style="padding:1px 10px;">Describes the interaction of the light with the surface</td>
+</tr>
+<tr>
+<td id="1051" class="lhpos tvpos" style="padding:1px 10px;"><span class="monospace">edf</span></td>
+<td id="1052" class="lhpos tvpos" style="padding:1px 10px;">Describes the emissive properties of the surface</td>
+</tr>
+<tr>
+<td id="1053" class="lhpos tvpos" style="padding:1px 10px;"><span class="monospace">vdf</span></td>
+<td id="1054" class="lhpos tvpos" style="padding:1px 10px;">Describes the light distribution in the volume</td>
+</tr>
+</table>
+</div>
+</div>
+
+<p id="1055">The elemental distribution functions are used as components of materials.
+The following three sections use these functions in minimal materials to demonstrate their visual properties.</p>
+
+
+<h3 id="bidirectional-scattering-distribution-functions" class="headerlink"><span class="sectionnumber">5.1.1</span>Bidirectional scattering distribution functions</h3>
+
+
+<p id="1056">The elemental BSDFs define the action of light at the surface of an object: how it is reflected from the surface and transmitted through the surface.</p>
+
+<table>
+<tr>
+<td id="1057" style="vertical-align:middle">
+<div id="1058" class="s-inblock s-imgmargin">
+<img id="diffuse-reflection-example" src="pages/img/diffuse_reflection_example.jpg" data-resize="true" data-wmax="512" data-hmax="512" data-aspect="1.0" data-width="0.5" data-height="0.5" class="s-center"></img><div id="1059" data-adjustwidth="true" data-width="0.5" class="s-caption">
+Fig. 5.1 &#8211; <span class="monospace">diffuse_reflection_bsdf</span>
+</div>
+
+</div>
+</td>
+<td id="1060" style="vertical-align:middle; padding-left:2em;">
+<div id="1061">
+<span class="monospace">diffuse_reflection_bsdf</span> <br/> <br/>
+A colored diffuse reflection component using roughness based on the Oren-Nayar model.
+This BSDF also implements pure Lambertian reflection.
+</div>        
+</td>
+</tr>
+</table>
+
+<table>
+<tr>
+<td id="1062" style="vertical-align:middle">
+<div id="1063" class="s-inblock s-imgmargin">
+<img id="diffuse-transmission-example" src="pages/img/diffuse_transmission_example.jpg" data-resize="true" data-wmax="512" data-hmax="512" data-aspect="1.0" data-width="0.5" data-height="0.5" class="s-center"></img><div id="1064" data-adjustwidth="true" data-width="0.5" class="s-caption">
+Fig. 5.2 &#8211; <span class="monospace">diffuse_transmission_bsdf</span>
+</div>
+
+</div>
+</td>
+<td id="1065" style="vertical-align:middle; padding-left:2em;">
+<div id="1066">
+<span class="monospace">diffuse_transmission_bsdf</span> <br/> <br/>
+A colored diffuse Lambertian transmission component.
+</div>        
+</td>
+</tr>
+</table>
+
+<table>
+<tr>
+<td id="1067" style="vertical-align:middle">
+<div id="1068" class="s-inblock s-imgmargin">
+<img id="specular-reflection-example" src="pages/img/specular_reflection_example.jpg" data-resize="true" data-wmax="512" data-hmax="512" data-aspect="1.0" data-width="0.5" data-height="0.5" class="s-center"></img><div id="1069" data-adjustwidth="true" data-width="0.5" class="s-caption">
+Fig. 5.3 &#8211; <span class="monospace">specular_bsdf</span>
+</div>
+
+</div>
+</td>
+<td id="1070" style="vertical-align:middle; padding-left:2em;">
+<div id="1071">
+<span class="monospace">specular_bsdf</span> <br/> <br/>
+A component representing colored specular reflection, specular transmission (refraction) or a combination of both.
+This image demonstrates pure specular reflection.
+</div>        
+</td>
+</tr>
+</table>
+
+<table>
+<tr>
+<td id="1072" style="vertical-align:middle">
+<div id="1073" class="s-inblock s-imgmargin">
+<img id="specular-transmission-example" src="pages/img/specular_transmission_example.jpg" data-resize="true" data-wmax="512" data-hmax="512" data-aspect="1.0" data-width="0.5" data-height="0.5" class="s-center"></img><div id="1074" data-adjustwidth="true" data-width="0.5" class="s-caption">
+Fig. 5.4 &#8211; <span class="monospace">specular_bsdf</span>
+</div>
+
+</div>
+</td>
+<td id="1075" style="vertical-align:middle; padding-left:2em;">
+<div id="1076">
+<span class="monospace">specular_bsdf</span> <br/> <br/>
+The use of the <span class="monospace">specular_bsdf</span> in this image demonstrates pure specular transmission.
+The index of refraction is controlled as a parameter to the BSDF.
+</div>        
+</td>
+</tr>
+</table>
+
+<table>
+<tr>
+<td id="1077" style="vertical-align:middle">
+<div id="1078" class="s-inblock s-imgmargin">
+<img id="specular-reflection-transmission-example" src="pages/img/specular_reflection_transmission_example.jpg" data-resize="true" data-wmax="512" data-hmax="512" data-aspect="1.0" data-width="0.5" data-height="0.5" class="s-center"></img><div id="1079" data-adjustwidth="true" data-width="0.5" class="s-caption">
+Fig. 5.5 &#8211; <span class="monospace">specular_bsdf</span>
+</div>
+
+</div>
+</td>
+<td id="1080" style="vertical-align:middle; padding-left:2em;">
+<div id="1081">
+<span class="monospace">specular_bsdf</span> <br/> <br/>
+This image combines both the reflective and transmissive factors of <span class="monospace">specular_bsdf</span>.
+If transmission and reflection are enabled at the same time, they are combined using a Fresnel term based on the index of refraction specified for the volume.
+This image also demonstrates how the color parameter of a distribution function can scale the function's result.
+</div>        
+</td>
+</tr>
+</table>
+
+<table>
+<tr>
+<td id="1082" style="vertical-align:middle">
+<div id="1083" class="s-inblock s-imgmargin">
+<img id="glossy-reflection-example" src="pages/img/glossy_reflection_example.jpg" data-resize="true" data-wmax="512" data-hmax="512" data-aspect="1.0" data-width="0.5" data-height="0.5" class="s-center"></img><div id="1084" data-adjustwidth="true" data-width="0.5" class="s-caption">
+Fig. 5.6 &#8211; <span class="monospace">simple_glossy_bsdf</span>
+</div>
+
+</div>
+</td>
+<td id="1085" style="vertical-align:middle; padding-left:2em;">
+<div id="1086">
+<span class="monospace">simple_glossy_bsdf</span> <br/> <br/>
+A component representing colored glossy reflection, glossy transmission or a combination of both.
+As in the specular case, if transmission and reflection are enabled at the same time, they are combined using the Fresnel term.
+</div>        
+</td>
+</tr>
+</table>
+
+<table>
+<tr>
+<td id="1087" style="vertical-align:middle">
+<div id="1088" class="s-inblock s-imgmargin">
+<img id="backscattering-glossy-example" src="pages/img/backscattering_glossy_example.jpg" data-resize="true" data-wmax="512" data-hmax="512" data-aspect="1.0" data-width="0.5" data-height="0.5" class="s-center"></img><div id="1089" data-adjustwidth="true" data-width="0.5" class="s-caption">
+Fig. 5.7 &#8211; <span class="monospace">backscattering_glossy_reflection_bsdf</span>
+</div>
+
+</div>
+</td>
+<td id="1090" style="vertical-align:middle; padding-left:2em;">
+<div id="1091">
+<span class="monospace">backscattering_glossy_reflection_bsdf</span> <br/> <br/>
+A colored glossy-reflection component capable of simulating back-scattering of light.
+</div>        
+</td>
+</tr>
+</table>
+
+
+<h3 id="emissive-distribution-functions" class="headerlink"><span class="sectionnumber">5.1.2</span>Emissive distribution functions</h3>
+
+
+<p id="1092">MDL defines a set of elemental emission distribution functions to simulate the light that interacts with MDL's surface and volume definitions.
+The traditional computer graphics methods of lighting a scene with special purpose constructs (like "directional lights" and "point lights") is replaced in MDL by defining properties of geometric objects so that they emit light.
+In this way, the syntactic expression of lighting is unified with the expression of surface and volume appearance.
+As geometric objects, "lights" in MDL are also more readily integrated into the scene definition interface of 3D applications.</p>
+
+<table>
+<tr>
+<td id="1093" style="vertical-align:middle">
+<div id="1094" class="s-inblock s-imgmargin">
+<img id="light-diffuse-example" src="pages/img/light_diffuse_example.jpg" data-resize="true" data-wmax="512" data-hmax="512" data-aspect="1.0" data-width="0.5" data-height="0.5" class="s-center"></img><div id="1095" data-adjustwidth="true" data-width="0.5" class="s-caption">Fig. 5.8 &#8211; <span class="monospace">diffuse_edf</span></div>
+
+</div>
+</td>
+<td id="1096" style="vertical-align:middle; padding-left:2em;">
+<div id="1097">
+<span class="monospace">diffuse_edf</span> <br/> <br/>
+Light emitted in all directions from the surface of the object, called <i>Lambertian light distribution</i> by analogy to Lambertian diffuse reflection.
+The spherical geometric object defined with the emissive material is visible in the image, but without the typical perceptual or photograph effects that provide "bloom" or lens distortions.
+</div>        
+</td>
+</tr>
+</table>
+
+<table>
+<tr>
+<td id="1098" style="vertical-align:middle">
+<div id="1099" class="s-inblock s-imgmargin">
+<img id="light-spot-example" src="pages/img/light_spot_example.jpg" data-resize="true" data-wmax="512" data-hmax="512" data-aspect="1.0" data-width="0.5" data-height="0.5" class="s-center"></img><div id="1100" data-adjustwidth="true" data-width="0.5" class="s-caption">Fig. 5.9 &#8211; <span class="monospace">spot_edf</span></div>
+
+</div>
+</td>
+<td id="1101" style="vertical-align:middle; padding-left:2em;">
+<div id="1102">
+<span class="monospace">spot_edf</span> <br/> <br/>
+Distribution of the emission based on the cosine between emission direction and surface normal (exponential cosine distribution).
+The emissive object is visible as a dark gray sphere because the camera is located at the edge of the cone of light distribution.
+</div>        
+</td>
+</tr>
+</table>
+
+<table>
+<tr>
+<td id="1103" style="vertical-align:middle">
+<div id="1104" class="s-inblock s-imgmargin">
+<img id="light-measured-example" src="pages/img/light_measured_example.jpg" data-resize="true" data-wmax="512" data-hmax="512" data-aspect="1.0" data-width="0.5" data-height="0.5" class="s-center"></img><div id="1105" data-adjustwidth="true" data-width="0.5" class="s-caption">
+Fig. 5.10 &#8211; <span class="monospace">measured_edf</span>
+</div>
+
+</div>
+</td>
+<td id="1106" style="vertical-align:middle; padding-left:2em;">
+<div id="1107">
+<span class="monospace">measured_edf</span> <br/> <br/>
+Light distribution based on a measured light profile.
+Arbitrary geometric structure for light distribution from the emissive object can be specified based on standard industrial formats called <i>light profiles</i>.
+Here the sharper boundary of the spatial distribution of light energy allows the light reflected by the diffuse surface of the object to be seen as a reddish color in the shadowed area.
+</div>        
+</td>
+</tr>
+</table>
+
+
+<h3 id="volume-distribution-functions" class="headerlink"><span class="sectionnumber">5.1.3</span>Volume distribution functions</h3>
+
+
+<p id="1108">BSDFs define the action of light at the object's surface.
+Volume distribution functions (VDFs) specify the behavior of light within an object.
+In combination, they provide for all the possibilities of light reflection, transmission, and interior modulation for lighting simulation.</p>
+
+<table>
+<tr>
+<td id="1109" style="vertical-align:middle">
+<div id="1110" class="s-inblock s-imgmargin">
+<img id="wax-example" src="pages/img/wax_example.jpg" data-resize="true" data-wmax="512" data-hmax="512" data-aspect="1.0" data-width="0.5" data-height="0.5" class="s-center"></img><div id="1111" data-adjustwidth="true" data-width="0.5" class="s-caption">
+Fig. 5.11 &#8211; <span class="monospace">anisotropic_vdf</span>
+</div>
+
+</div>
+</td>
+<td id="1112" style="vertical-align:middle; padding-left:2em;">
+<div id="1113">
+<span class="monospace">anisotropic_vdf</span> <br/> <br/>
+Addition of absorption effects and subsurface scattering to the material's volume.
+The BSDF for this material specifies that all light penetrates the object (<i>transmission scattering mode</i>).
+</div>        
+</td>
+</tr>
+</table>
+
+<table>
+<tr>
+<td id="1114" style="vertical-align:middle">
+<div id="1115" class="s-inblock s-imgmargin">
+<img id="jade-example" src="pages/img/jade_example.jpg" data-resize="true" data-wmax="512" data-hmax="512" data-aspect="1.0" data-width="0.5" data-height="0.5" class="s-center"></img><div id="1116" data-adjustwidth="true" data-width="0.5" class="s-caption">
+Fig. 5.12 &#8211; <span class="monospace">anisotropic_vdf</span>
+</div>
+
+</div>
+</td>
+<td id="1117" style="vertical-align:middle; padding-left:2em;">
+<div id="1118">
+<span class="monospace">anisotropic_vdf</span> <br/> <br/>
+Parametric control of the volume distribution function can simulate a wide variety of physical substances.
+The material of this image only differs from the material of the previous image in the BSDF specifying both reflection and transmission of the light, and in the values of three VDF parameters that define the index of refraction, the degree of scattering, and the scattering direction within the object.
+</div>        
+</td>
+</tr>
+</table>
+
+<table>
+<tr>
+<td id="1119" style="vertical-align:middle">
+<div id="1120" class="s-inblock s-imgmargin">
+<img id="measured-light-jade-example" src="pages/img/measured_light_jade_example.jpg" data-resize="true" data-wmax="512" data-hmax="512" data-aspect="1.0" data-width="0.5" data-height="0.5" class="s-center"></img><div id="1121" data-adjustwidth="true" data-width="0.5" class="s-caption">
+Fig. 5.13 &#8211; <span class="monospace">anisotropic_vdf</span>
+</div>
+
+</div>
+</td>
+<td id="1122" style="vertical-align:middle; padding-left:2em;">
+<div id="1123">
+<span class="monospace">anisotropic_vdf</span> <br/> <br/>
+Even with apparently simple materials made from the elemental BSDFs, the design of the lighting simulation can reveal complex properties of the material.
+Here the material of the object, <span class="monospace">anisotropic_vdf</span>, is identical to the previous example, lit by the emmisive distribution function <span class="monospace">measured_edf</span> of the previous section.
+</div>        
+</td>
+</tr>
+</table>
+
+
+<h3 id="measured-materials" class="headerlink"><span class="sectionnumber">5.1.4</span>Measured materials</h3>
+
+
+<p id="1124">The previous definitions of light transport used analytic methods which depend upon a mathematical theory of the physics of light.
+MDL also supports material definitions based on measurement of real-world surfaces, where light interaction with objects is measured over a series of different incident light and viewing angles.
+The resulting dataset is used as input to an elemental BSDF in MDL that defines a <i>measured BSDF</i>.</p>
+
+<p id="1125">A measurement dataset can be used as an MDL input parameter by constructing a value of type <span class="monospace">bsdf_measurement</span>.
+The <span class="monospace">bsdf_measurement</span> constructor takes a file path of a measurement dataset as an input argument:</p>
+
+<span id="listing_9.6"></span>
+<div id="1126" class="annotatebox" data-scale="1.0" data-fixed="false"><div id="1127" class="codecaption">Listing 5.6</div><div id="1128" class="annotateline"><div id="1129" class="annotatepad"><pre id="1130" class="uncommented">bsdf_measurement(uniform string name)
+</pre></div></div></div>
+
+<p id="1131">A value of <span class="monospace">bsdf_measurement</span> is used as the argument for the <span class="monospace">measurement</span> parameter of the BSDF <span class="monospace">measured_bsdf:</span></p>
+
+<span id="listing_9.7"></span>
+<div id="1132" class="annotatebox" data-scale="1.0" data-fixed="false"><div id="1133" class="codecaption">Listing 5.7</div><div id="1134" class="annotateline"><div id="1135" class="annotatepad"><pre id="1136" class="uncommented">bsdf measured_bsdf (
+    uniform bsdf_measurement measurement,
+    uniform float            multiplier = 1.0,
+    uniform scatter_mode     mode       = scatter_reflect,
+    uniform string           handle     = ""
+);
+</pre></div></div></div>
+
+<table>
+<tr>
+<td id="1137" style="vertical-align:middle">
+<div id="1138" class="s-inblock s-imgmargin">
+<img id="red-car-paint" src="pages/img/red_car_paint.jpg" data-resize="true" data-wmax="600" data-hmax="600" data-aspect="1.0" data-width="0.5" data-height="0.5" class="s-center"></img><div id="1139" data-adjustwidth="true" data-width="0.5" class="s-caption">
+Fig. 5.14 &#8211; <span class="monospace">measured_bsdf</span>
+</div>
+
+</div>
+</td>
+<td id="1140" style="vertical-align:middle; padding-left:2em;">
+<div id="1141">
+<span class="monospace">measured_bsdf</span> <br/> <br/>
+The red material is defined by a measurement of a car paint surface.
+The materials of the pedestal and ground are defined by measurements of carpet and cement, respectively.
+Accompanying texture maps supply the level of fine color detail for the carpet and cement.
+</div>        
+</td>
+</tr>
+</table>
+
+<table>
+<tr>
+<td id="1142" style="vertical-align:middle">
+<div id="1143" class="s-inblock s-imgmargin">
+<img id="blue-car-paint-3" src="pages/img/blue_car_paint.jpg" data-resize="true" data-wmax="600" data-hmax="600" data-aspect="1.0" data-width="0.5" data-height="0.5" class="s-center"></img><div id="1144" data-adjustwidth="true" data-width="0.5" class="s-caption">
+Fig. 5.15 &#8211; <span class="monospace">measured_bsdf</span>
+</div>
+
+</div>
+</td>
+<td id="1145" style="vertical-align:middle; padding-left:2em;">
+<div id="1146">
+<span class="monospace">measured_bsdf</span> <br/> <br/>
+In this image the pedestal and ground materials have been exchanged.
+The geometric models define a parametric space for the texture mapping, which is combined with scaling factors for the texture application provided by the material.
+The blue car paint here uses the same material as the previous example, with a different measured data set provided as the value of the <span class="monospace">name</span> parameter to <span class="monospace">bsdf_measurement</span>.
+</div>        
+</td>
+</tr>
+</table>
+
+
+<h2 id="distribution-function-modifiers-and-combiners" class="headerlink"><span class="sectionnumber">5.2</span>Distribution function modifiers and combiners</h2>
+
+
+<p id="1147">The previous sections showed simple materials built from the elemental distribution functions based on analytic methods and real-world measurements.
+MDL also provides building blocks to combine or modify BSDFs to enable the description of more complex light-material interactions.
+The elemental EDFs can also be mixed together to implement combined emission properties in a single material.</p>
+
+<p id="1148">Distribution function modifiers and combiners can describe complex reflective and transmissive characteristics (compound distribution functions).
+Because of their uniform syntax, analytic and measured materials can also be combined.
+Modifiers can be applied recursively, allowing further modification and combination of compounds.</p>
+
+<dl>
+<dt id="1149" class="normal"><span class="monospace">normalized_mix</span></dt>
+<dd id="1150">Mix N elemental or compound distribution functions based on N float weights.
+If the sum of the weights exceeds 1, they are normalized.</dd>
+
+<dt id="1151" class="normal"><span class="monospace">clamped_mix</span></dt>
+<dd id="1152">Mix N elemental or compound distribution functions based on N float weights.
+Distribution functions and weights are summed in the order they are given.
+When the sum of weights reaches 1, the remainder, if any, is clamped.</dd>
+
+<dt id="1153" class="normal"><span class="monospace">weighted_layer</span></dt>
+<dd id="1154">Add an elemental or compound BSDF as a layer on top of another elemental or compound BSDF according to a weight w.
+The base is weighted with 1-w.</dd>
+
+<dt id="1155" class="normal"><span class="monospace">fresnel_layer</span></dt>
+<dd id="1156">Add an elemental or compound BSDF as a layer on top of another elemental or compound BSDF according to a weight w and a Fresnel term using a dedicated index of refraction for the layer.
+The base is weighted with 1-(w*fresnel(ior)).</dd>
+
+<dt id="1157" class="normal"><span class="monospace">custom_curve_layer</span></dt>
+<dd id="1158">Add an elemental or compound BSDF as a layer on top of another elemental or compound BSDF according to a weight w and a Schlick-style directional-dependent curve function.
+The base is weighted with 1-(w*curve()).</dd>
+
+<dt id="1159" class="normal"><span class="monospace">measured_curve_layer</span></dt>
+<dd id="1160">Add an elemental or compound BSDF as a layer on top of another elemental or compound BSDF according to a weight w and a directional-dependent measurement of the reflection behavior.
+The base is weighted with 1-(w*measurement()).</dd>
+
+<dt id="1161" class="normal"><span class="monospace">tint</span></dt>
+<dd id="1162">Tint the result of an elemental or compound distribution function with an additional color.</dd>
+
+<dt id="1163" class="normal"><span class="monospace">thin_film</span></dt>
+<dd id="1164">Add reflective thin film interference color to an elemental or compound BSDF.</dd>
+
+<dt id="1165" class="normal"><span class="monospace">directional_factor</span></dt>
+<dd id="1166">A direction-dependent weight based on a custom curve that is applied to one elemental or compound BSDF.</dd>
+
+<dt id="1167" class="normal"><span class="monospace">measured_curve_factor</span></dt>
+<dd id="1168">A direction-dependent weight based on a measured reflection curve that is applied to one elemental or compound BSDF.</dd>
+</dl>
+
+<p id="1169">The following series demonstrates the sequential combination of a series of BSDFs.
+Each successive image adds a new layer to the previous one.</p>
+
+<div id="1170" style="text-align: center;">
+<div id="1171" class="s-inblock s-imgmargin">
+<img id="layer-combination-0" src="pages/img/layer_combination_0.jpg" data-resize="true" data-wmax="1000" data-hmax="357" data-aspect="2.8011" data-width="1.0" data-height="0.357" class="s-center"></img><div id="1172" data-adjustwidth="true" data-width="1.0" class="s-caption">
+Fig. 5.16 &#8211; <span class="regularfont">The base layer is defined by <span class="monospace">diffuse_reflection_bsdf</span> with a tinting color of red.</span>
+</div>
+
+</div>
+
+</div>
+
+<div id="1173" style="text-align: center;">
+<div id="1174" class="s-inblock s-imgmargin">
+<img id="layer-combination-1" src="pages/img/layer_combination_1.jpg" data-resize="true" data-wmax="1000" data-hmax="357" data-aspect="2.8011" data-width="1.0" data-height="0.357" class="s-center"></img><div id="1175" data-adjustwidth="true" data-width="1.0" class="s-caption">
+Fig. 5.17 &#8211; <span class="regularfont">A yellow-tinted <span class="monospace">diffuse_reflection_bsdf</span> is added to the edges with <span class="monospace">custom_curve_layer</span>.</span>
+</div>
+
+</div>
+
+</div>
+
+<div id="1176" style="text-align: center;">
+<div id="1177" class="s-inblock s-imgmargin">
+<img id="layer-combination-2" src="pages/img/layer_combination_2.jpg" data-resize="true" data-wmax="1000" data-hmax="357" data-aspect="2.8011" data-width="1.0" data-height="0.357" class="s-center"></img><div id="1178" data-adjustwidth="true" data-width="1.0" class="s-caption">
+Fig. 5.18 &#8211; <span class="regularfont">A layer of <span class="monospace">simple_glossy_bsdf</span> is added using <span class="monospace">weighted_layer</span>.</span>
+</div>
+
+</div>
+
+</div>
+
+<div id="1179" style="text-align: center;">
+<div id="1180" class="s-inblock s-imgmargin">
+<img id="layer-combination-3" src="pages/img/layer_combination_3.jpg" data-resize="true" data-wmax="1000" data-hmax="357" data-aspect="2.8011" data-width="1.0" data-height="0.357" class="s-center"></img><div id="1181" data-adjustwidth="true" data-width="1.0" class="s-caption">
+Fig. 5.19 &#8211; <span class="regularfont">Another layer of <span class="monospace">simple_glossy_bsdf</span> with sharper highlights is added with <span class="monospace">weighted_layer</span>.</span>
+</div>
+
+</div>
+
+</div>
+
+<div id="1182" style="text-align: center;">
+<div id="1183" class="s-inblock s-imgmargin">
+<img id="layer-combination-4" src="pages/img/layer_combination_4.jpg" data-resize="true" data-wmax="1000" data-hmax="357" data-aspect="2.8011" data-width="1.0" data-height="0.357" class="s-center"></img><div id="1184" data-adjustwidth="true" data-width="1.0" class="s-caption">
+Fig. 5.20 &#8211; <span class="regularfont">Adding a layer of <span class="monospace">specular_bsdf</span> with <span class="monospace">fresnel_layer</span> resembles the clear coat of an automotive finish.</span>
+</div>
+
+</div>
+
+</div>
+
+<p id="1185">Analytic and measured materials can also be combined.
+Measurement devices for light scattering may have difficulty accurately recording intensities at extreme grazing angles.
+For example, the measured car paint renderings  lack the glossy reflections that are typical at edges.
+Defining this reflection as a layer to be combined with the measured BSDF can produce the missing effect.</p>
+
+<div id="1186" class="s-imagegrid-no-caption">
+<div id="1187" class="s-row">
+<div id="1188" class="s-cell">
+<div id="1189" class="s-inblock">
+<img id="blue-car-paint" src="pages/img/blue_car_paint.jpg"
+   data-resize="true" data-wmax="600" data-hmax="600" data-aspect="1.0" data-width="0.441" data-height="0.441" class="s-center">
+</img>
+<div id="1190" data-adjustwidth="true" data-width="0.441" class="s-cell-caption-bottom">Fig. 5.21 &#8211; Only using measurement data
+</div>
+</div>
+</div><span class="s-betweener"></span><div id="1191" class="s-cell">
+<div id="1192" class="s-inblock">
+<img id="blue-car-paint-glossy" src="pages/img/blue_car_paint_glossy.jpg"
+   data-resize="true" data-wmax="600" data-hmax="600" data-aspect="1.0" data-width="0.441" data-height="0.441" class="s-center">
+</img>
+<div id="1193" data-adjustwidth="true" data-width="0.441" class="s-cell-caption-bottom">Fig. 5.22 &#8211; Adding edge reflection as a layer
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<h2 id="mdl-syntax" class="headerlink"><span class="sectionnumber">5.3</span>MDL syntax</h2>
+
+
+<p id="1194">MDL provides a notation inspired by functional programming to create a custom material struct and then map an input parameter set to this material.
+The following example describes a simple material exhibiting Lambertian reflective properties and an input providing a <span class="monospace">diffuse_color</span> input defaulting to red:</p>
+
+<span id="listing_9.8"></span>
+<div id="1195" class="annotatebox" data-scale="1.0" data-fixed="false"><div id="1196" class="codecaption">Listing 5.8</div><div id="1197" class="annotateline"><div id="1198" class="annotatepad"><pre id="1199" class="uncommented">material diffuse (
+    color diffuse_color = color(0.7,0.0,0.0) )
+= material (
+    surface :
+        material_surface ( 
+            scattering :
+                diffuse_reflection_bsdf (
+                tint : diffuse_color )));
+</pre></div></div></div>
+
+<p id="1200">Note here that MDL structs can have defaults for their members and that the example only provides a value for the <span class="monospace">surface</span> member of the material.
+All other members of the material struct maintain their default values.</p>
+
+<p id="1201">A similar syntax can be used to change the parameterization or interface of an already existing material.
+The following example code creates a blue variant of the preceding example:</p>
+
+<span id="listing_9.9"></span>
+<div id="1202" class="annotatebox" data-scale="1.0" data-fixed="false"><div id="1203" class="codecaption">Listing 5.9</div><div id="1204" class="annotateline"><div id="1205" class="annotatepad"><pre id="1206" class="uncommented">material blue_diffuse()
+= diffuse (
+    diffuse_color : color(0.0,0.0,0.7) );
+</pre></div></div></div>
+
+<p id="1207">A parameter of a material can be a material itself.
+Since a material functions as a struct, this permits the straightforward reuse of materials.
+For example, the following material takes an arbitrary base material and adds a reflective clear coat on top:</p>
+
+<span id="listing_9.10"></span>
+<div id="1208" class="annotatebox" data-scale="1.0" data-fixed="false"><div id="1209" class="codecaption">Listing 5.10</div><div id="1210" class="annotateline"><div id="1211" class="annotatepad"><pre id="1212" class="uncommented">material add_clear_coat (
+    color ior = color(1.5),
+    material base )
+= material(
+    volume : base.volume,
+    geometry : base.geometry,
+    surface :
+        material_surface (
+            emission : base.surface.emission,
+            scattering :
+                fresnel_layer (
+                    layer : specular_bsdf (
+                        scatter_mode : scatter_reflect ),
+                    base : base.surface.scattering,
+                    ior : ior )));
+</pre></div></div></div>
+
+<p id="1213">Measured materials are also defined in a syntactically consistent way in the material definition.
+The following material defines the measured blue car paint that is combined with a glossy reflection layer, shown.
+Note that the measured data is provided as a filename parameter of function <span class="monospace">bsdf_measurement</span>.</p>
+
+<span id="listing_9.11"></span>
+<div id="1214" class="annotatebox" data-scale="1.0" data-fixed="false"><div id="1215" class="codecaption">Listing 5.11</div><div id="1216" class="annotateline"><div id="1217" class="annotatepad"><pre id="1218" class="uncommented">material carpaint_blue (
+    float coat_ior = 1.5 )
+= material (
+    surface :
+        material_surface (
+            scattering :
+                fresnel_layer (
+                    layer : specular_bsdf (
+                        mode : scatter_reflect,
+                        tint : color(1.0) ),
+                    base : measured_bsdf (
+                        measurement :
+                            bsdf_measurement("carpaint_blue.mbsdf") ),
+                    ior : coat_ior )));
+</pre></div></div></div>                                                                                                
+
+<p id="1219">MDL provides a <i>let-expression</i> to support the introduction of local variables.
+The content of the expression is purely declarative, but declarations are evaluated in sequence, allowing access to already declared variables in later declarations.
+Using a let-expression, the <span class="monospace">add_clear_coat</span> example could be rewritten as:</p>
+
+<span id="listing_9.12"></span>
+<div id="1220" class="annotatebox" data-scale="1.0" data-fixed="false"><div id="1221" class="codecaption">Listing 5.12</div><div id="1222" class="annotateline"><div id="1223" class="annotatepad"><pre id="1224" class="uncommented">material add_clear_coat (
+    color ior = color(1.5),
+    material base = material() ) 
+= let {
+    bsdf coat =
+        specular_bsdf (
+            scatter_mode : scatter_reflect );
+    bsdf coated_scattering =
+        fresnel_layer (
+            layer : coat,
+            base : base.surface.scattering,
+            ior : ior );
+    material_surface coated_surface (
+        emission : base.surface.emission,
+        scattering : coated_scattering );
+} in material (
+    volume : base.volume,
+    geometry : base.geometry,
+    surface : coated_surface );
+</pre></div></div></div>
+
+<p id="1225">Using let-expressions, libraries of materials can be based on a set of small, self-defined, reusable building blocks.
+For example, putting a layer of rust on the surface of a painted car can be implemented as the combination of two materials.</p>
+
+<span id="listing_9.13"></span>
+<div id="1226" class="annotatebox" data-scale="1.0" data-fixed="false"><div id="1227" class="codecaption">Listing 5.13</div><div id="1228" class="annotateline"><div id="1229" class="annotatepad"><pre id="1230" class="uncommented">material rusty_carpaint( /* ... */ )
+= let {
+    material base = carpaint_material();
+    material top = rust_material();
+    float blend = rust_blend_function();
+} in material (
+    surface :
+        material_surface (
+            scattering :
+                weighted_layer (
+                    layer : top.surface.scattering,
+                    base : base.surface.scattering,
+                    weight : blend ),
+            /* ... */  ));
+</pre></div></div></div>
+
+<h1 id="modules" style="clear:both;" class="headerlink"><span class="sectionnumber">6</span>Modules</h1>
+
+
+<p id="1231">Modules allow materials and functions to be packaged for re-use in independent libraries that can be used together.
+Name conflicts can be avoided by choosing between unqualified and qualified in module import statements.</p>
+
+<p id="1232">MDL's import mechanisms does not offer any name-conflict resolution mechanisms.
+The purpose of this policy is to have a well-defined module system to enable packaging and re-use of material libraries by independent providers.</p>
+
+<p id="1233">A directory is considered a package.
+The name of the package is the name of the directory.
+Note that this restricts the names of directories that are used as packages to legal identifiers.</p>
+
+<p id="1234">Modules can be contained in packages and the resulting packages can be nested, allowing comprehensive organization of complex libraries.</p>
+
+<p id="1235">Extensions to core MDL, such as standard annotations and distribution, math, texture and noise functions are provided in the form of standard modules.</p>
+
+
+<h1 id="functions" style="clear:both;" class="headerlink"><span class="sectionnumber">7</span>Functions</h1>
+
+
+<p id="1236">Users needing special texturing functionality are able to provide their own texturing functions written in a C-inspired procedural language.
+Using this language, implementation of procedural textures is possible as well as the implementation of custom uv-coordinate handling and generation.
+Texturing functions have access to a limited, read-only rendering state dedicated to the needs of texturing.
+Texturing functions are pure and free of side-effects.
+Together with the dedicated texturing state, this makes texturing functions independent from the renderer architecture, making it easier to use them in multiple renderers.</p>
+
+<p id="1237">Function argument initialization can use other function calls, forming a call graph that is the equivalent to shader graphs which are often provided by traditional shading languages.</p>
+
+<p id="1238">MDL supports specification of default values for function parameters and a calling syntax using named arguments to provide convenience when using texturing functions.</p>
+
+<p id="1239">The following is an example of a function with default initializers:</p>
+
+<span id="listing_9.14"></span>
+<div id="1240" class="annotatebox" data-scale="1.0" data-fixed="false"><div id="1241" class="codecaption">Listing 7.14</div><div id="1242" class="annotateline"><div id="1243" class="annotatepad"><pre id="1244" class="uncommented">float3 texture_lookup(float2 uv, int space = 0);
+</pre></div></div></div>
+
+<p id="1245">Calling function <span class="monospace">texture_lookup</span> in another function body might be expressed as follows:</p>
+
+<span id="listing_9.15"></span>
+<div id="1246" class="annotatebox" data-scale="1.0" data-fixed="false"><div id="1247" class="codecaption">Listing 7.15</div><div id="1248" class="annotateline"><div id="1249" class="annotatepad"><pre id="1250" class="uncommented">float3 c = texture_lookup(uv : coord);
+</pre></div></div></div>
+
+<h1 id="types" style="clear:both;" class="headerlink"><span class="sectionnumber">8</span>Types</h1>
+
+
+<p id="1251">The type system of MDL is also inspired by the C language, with additional custom types for domain-specific use, such as vectors and matrices.
+MDL also provides an abstract type for colors, allowing renderers to choose their own, appropriate format for storing color information.</p>
+
+<p id="1252">The struct type plays a major role in MDL's material definition syntax.
+To allow convenient handling of materials, struct types have an automatic constructor which, together with the default values for struct members and the extended calling syntax for functions, allows the relevant code to be short and precise.</p>
+
+<p id="1253">Variables of an array type can be declared in two ways in MDL.
+The declarations differ in how the size of the array is specified.</p>
+
+<ul style="list-style-type:square;" class="">
+<li>In the <i>size-immediate array type</i>, the size of the array is given as a constant value when the array variable is declared.
+This array type corresponds to the conventional array type in the C language.</li>
+<li>In the <i>size-deferred array type</i>, the size of the array is given as a symbolic size identifier and bound to a real size on first use.
+The size identifier can be used when the size of its array is required in other
+expressions.</li>
+</ul>
+
+
+<h1 id="annotations" style="clear:both;" class="headerlink"><span class="sectionnumber">9</span>Annotations</h1>
+
+
+<p id="1254">MDL defines a mechanism called <i>annotations</i> to associate meta-data with material definitions and their components.</p>
+
+<p id="1255">Annotations can be applied to:</p>
+
+<ul style="list-style-type:square;" class="">
+<li>Functions</li>
+<li>Function input parameters</li>
+<li>Function return values</li>
+<li>Struct members</li>
+<li>Enumeration values</li>
+<li>Material definitions</li>
+<li>Material definition input parameters</li>
+</ul>
+
+<p id="1256">Annotations are a standard mechanism for adding additional semantic information, such as graphical interface specification, documentation data and other integration support, to a program.
+MDL provides a set of standard annotations (defined in a standard MDL module) as well as a syntax for users to add custom annotations.
+Syntactically, MDL annotations are inspired by the syntax of <tt>C#</tt> annotations.</p>
+
+<div id="bottomspacer"></div>
+</div>
+
+</body>
+</html>
+
+

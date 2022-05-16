@@ -1,0 +1,82 @@
+mdl 1.4;
+
+import ::base::*;
+import ::df::*;
+import ::math::*;
+import ::tex::*;
+import ::anno::*;
+import ::state::*;
+import .::baking_annotations::*;
+
+//--------------------------------------------------------------------------------------------------
+// little helper we don't really need
+//--------------------------------------------------------------------------------------------------
+
+color lookup_color_ext(
+    uniform texture_2d texture, 
+    int tex_coord_index = 0,
+    color default_value = color(0.0)
+    )
+{
+    float3 tex_coord = state::texture_coordinate(tex_coord_index);
+    return tex::texture_isvalid(texture)
+        ? tex::lookup_color(texture, float2(tex_coord.x, tex_coord.y))
+        : default_value;
+}
+
+float lookup_float_ext(
+    uniform texture_2d texture, 
+    int tex_coord_index = 0,
+    float default_value = 0.0
+    )
+{
+    float3 tex_coord = state::texture_coordinate(tex_coord_index);
+    return tex::texture_isvalid(texture)
+        ? tex::lookup_float(texture, float2(tex_coord.x, tex_coord.y))
+        : default_value;
+}
+
+//--------------------------------------------------------------------------------------------------
+// Target Material for baking expressions of a complex material into textures
+//--------------------------------------------------------------------------------------------------
+
+export material Target(
+    color tint = color(0.0) [[ baking_annotations::target_baked_argument("tint_baked", "tint_constant", "RGB32_SFLOAT", baking_annotations::TRANSFORM_NONE, "opacity_blend") ]],
+    float roughness = 0.0   [[ baking_annotations::target_baked_argument("roughness_baked", "roughness_constant", "R32_SFLOAT", baking_annotations::TRANSFORM_NONE, "opacity_blend") ]]
+)
+[[ 
+    baking_annotations::target_material_model(),
+    baking_annotations::target_rendering_material("Rendering")  // assuming this is in the same module for now, would make more sense on the complex material
+]] 
+= material(
+    surface: material_surface(
+        scattering: df::simple_glossy_bsdf(
+            tint: tint,
+            roughness_u: roughness
+        )
+    )
+);
+
+//--------------------------------------------------------------------------------------------------
+// Alternative Rendering Material that consumes the baked textures or constants in case baking
+// was not required
+//--------------------------------------------------------------------------------------------------
+
+export material Rendering(
+    uniform color tint_constant = color(0.0),
+    uniform texture_2d tint_baked = texture_2d(),
+    uniform float roughness_constant = 0.0,
+    uniform texture_2d roughness_baked = texture_2d()
+)
+= material(
+    surface: material_surface(
+        scattering: df::simple_glossy_bsdf(
+            tint: lookup_color_ext(
+                texture: tint_baked,
+                default_value: tint_constant),
+            roughness_u: lookup_float_ext(
+                texture: roughness_baked,
+                default_value: roughness_constant)
+        )
+    )
+);

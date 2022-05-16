@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:trolltech="urn:trolltech:names:ts:document:1.0">
+    <file original="" datatype="plaintext" source-language="en" target-language="fr">
+        <body>
+            <trans-unit id="0">
+                <source xml:space="preserve">Copyright 2022 NVIDIA Corporation. All rights reserved.</source>
+                <target xml:space="preserve">Copyright 2022 NVIDIA Corporation. Tous droits réservés.</target>
+                <note from="translator">::anno::copyright_notice(string) gun_metal</note>
+            </trans-unit>
+            <trans-unit id="1">
+                <source xml:space="preserve">NVIDIA corporation</source>
+                <target xml:space="preserve">NVIDIA Corporation</target>
+                <note from="translator">::anno::author(string) gun_metal</note>
+            </trans-unit>
+            <trans-unit id="2">
+                <source xml:space="preserve">Gun Metal</source>
+                <target xml:space="preserve">Bronze</target>
+                <note from="translator">::anno::display_name(string) gun_metal</note>
+            </trans-unit>
+            <trans-unit id="3">
+                <source xml:space="preserve">Base color</source>
+                <target xml:space="preserve">Couleur de base</target>
+                <note from="translator">::anno::display_name(string) gun_metal</note>
+            </trans-unit>
+            <trans-unit id="4">
+                <source xml:space="preserve">The base color of the material</source>
+                <target xml:space="preserve">Couleur de base du matériau</target>
+                <note from="translator">::anno::description(string) gun_metal</note>
+            </trans-unit>
+            <trans-unit id="5">
+                <source xml:space="preserve">Flake Amount</source>
+                <target xml:space="preserve">Quantité de paillettes</target>
+                <note from="translator">::anno::display_name(string) gun_metal</note>
+            </trans-unit>
+            <trans-unit id="6">
+                <source xml:space="preserve">The amount of metal flakes in the material</source>
+                <target xml:space="preserve">Quantité de paillettes de métal dans le matériau</target>
+                <note from="translator">::anno::description(string) gun_metal</note>
+            </trans-unit>
+            <trans-unit id="7">
+                <source xml:space="preserve">Particle Size</source>
+                <target xml:space="preserve">Taille des particules</target>
+                <note from="translator">::anno::display_name(string) gun_metal</note>
+            </trans-unit>
+            <trans-unit id="8">
+                <source xml:space="preserve">The size of the particles in millimeters. If the particles don't appear at all, check whether you are using the correct units in yout scene. The materials is built to use meters as scene unit</source>
+                <target xml:space="preserve">Taille des particules en millimètres. Si les particules n'apparaissent pas du tout, vérifiez que vous utilisez les bonnes unités dans votre scène. Les matériaux sont conçus pour utiliser le mètre comme unité</target>
+                <note from="translator">::anno::description(string) gun_metal</note>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

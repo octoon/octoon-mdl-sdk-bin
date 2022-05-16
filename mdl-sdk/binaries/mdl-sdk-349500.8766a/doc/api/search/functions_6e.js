@@ -1,0 +1,8 @@
+var searchData=
+[
+  ['name_5fof',['name_of',['../classmi_1_1neuraylib_1_1ITransaction.html#a0db9733124735032153593b1a6710ebb',1,'mi::neuraylib::ITransaction']]],
+  ['negative_5fmax',['negative_max',['../structmi_1_1base_1_1numeric__traits__base.html#ad54c6668704533c323f2e28b1732a3a9',1,'mi::base::numeric_traits_base::negative_max()'],['../structmi_1_1base_1_1numeric__traits_3_01Sint8_01_4.html#a310fd9a65115bbcb1475cf415f432773',1,'mi::base::numeric_traits&lt; Sint8 &gt;::negative_max()'],['../structmi_1_1base_1_1numeric__traits_3_01Sint16_01_4.html#a239981931aeb09efd8b90276a1ebaf95',1,'mi::base::numeric_traits&lt; Sint16 &gt;::negative_max()'],['../structmi_1_1base_1_1numeric__traits_3_01Sint32_01_4.html#a65aca3be376a24a9c6696295014999fd',1,'mi::base::numeric_traits&lt; Sint32 &gt;::negative_max()'],['../structmi_1_1base_1_1numeric__traits_3_01Sint64_01_4.html#a9db53e947a4191706c07a4669829b790',1,'mi::base::numeric_traits&lt; Sint64 &gt;::negative_max()'],['../structmi_1_1base_1_1numeric__traits_3_01Float32_01_4.html#a2c96bbc98eec9ba5fb222a19c73f4a35',1,'mi::base::numeric_traits&lt; Float32 &gt;::negative_max()'],['../structmi_1_1base_1_1numeric__traits_3_01Float64_01_4.html#a5ca28af11cd6b84bb8dfc8221e884f7c',1,'mi::base::numeric_traits&lt; Float64 &gt;::negative_max()']]],
+  ['normalize',['normalize',['../classmi_1_1math_1_1Vector.html#acaebbe9229c146dd1af772f8ce551117',1,'mi::math::Vector']]],
+  ['notify',['notify',['../classmi_1_1neuraylib_1_1IMdl__loading__wait__handle.html#acd35b43a9ada4723c251bd160e62b8e3',1,'mi::neuraylib::IMdl_loading_wait_handle']]],
+  ['ntsc_5fintensity',['ntsc_intensity',['../classmi_1_1math_1_1Color.html#a54b2f461342255673503f22f7d85d7f5',1,'mi::math::Color']]]
+];

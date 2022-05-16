@@ -1,0 +1,11 @@
+var searchData=
+[
+  ['unlock',['unlock',['../classmi_1_1neuraylib_1_1IDatabase.html#ac38a3fec4e751870cd11a3190476dd7a',1,'mi::neuraylib::IDatabase::unlock()'],['../classmi_1_1base_1_1Lock.html#a7814516ec502b2e7a2f20afd09f7290d',1,'mi::base::Lock::unlock()'],['../classmi_1_1base_1_1Recursive__lock.html#a4e849adc26d152c91738e8458a4f6ea5',1,'mi::base::Recursive_lock::unlock()']]],
+  ['unregister_5fapi_5fcomponent',['unregister_api_component',['../classmi_1_1neuraylib_1_1INeuray.html#a72ae143a3c49d162a42630d7dd3a2548',1,'mi::neuraylib::INeuray::unregister_api_component(const base::Uuid &amp;uuid)=0'],['../classmi_1_1neuraylib_1_1INeuray.html#a1c6bc8b51cf250ecb47db027736fd30b',1,'mi::neuraylib::INeuray::unregister_api_component()'],['../classmi_1_1neuraylib_1_1IPlugin__api.html#a91bbb542c9456a03927c9d781676f142',1,'mi::neuraylib::IPlugin_api::unregister_api_component(const base::Uuid &amp;uuid)=0'],['../classmi_1_1neuraylib_1_1IPlugin__api.html#a3b0439b8e13b4676f297284f8c53cacc',1,'mi::neuraylib::IPlugin_api::unregister_api_component()']]],
+  ['upgrade_5fmdl_5fversion',['upgrade_mdl_version',['../classmi_1_1neuraylib_1_1IMdl__module__transformer.html#a38d4d29cc00746cdf7aecd9874a8d15c',1,'mi::neuraylib::IMdl_module_transformer']]],
+  ['use_5fabsolute_5fimport_5fdeclarations',['use_absolute_import_declarations',['../classmi_1_1neuraylib_1_1IMdl__module__transformer.html#ab43d4da1c40421e30a81145a36e552ac',1,'mi::neuraylib::IMdl_module_transformer']]],
+  ['use_5fabsolute_5fresource_5ffile_5fpaths',['use_absolute_resource_file_paths',['../classmi_1_1neuraylib_1_1IMdl__module__transformer.html#a2e5b48746c355204a602da982ffcaa94',1,'mi::neuraylib::IMdl_module_transformer']]],
+  ['use_5frelative_5fimport_5fdeclarations',['use_relative_import_declarations',['../classmi_1_1neuraylib_1_1IMdl__module__transformer.html#a2553e3297f12db92867c265240ed05f3',1,'mi::neuraylib::IMdl_module_transformer']]],
+  ['use_5frelative_5fresource_5ffile_5fpaths',['use_relative_resource_file_paths',['../classmi_1_1neuraylib_1_1IMdl__module__transformer.html#af08cd2924967cb3eda4be42d56b46aa5',1,'mi::neuraylib::IMdl_module_transformer']]],
+  ['uuid_5fhash32',['uuid_hash32',['../group__mi__base__iinterface.html#ga4b308471639eac61348d15ef291f2dae',1,'mi::base']]]
+];

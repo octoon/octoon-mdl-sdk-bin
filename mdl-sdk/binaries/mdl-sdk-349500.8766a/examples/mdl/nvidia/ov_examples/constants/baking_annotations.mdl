@@ -1,0 +1,33 @@
+mdl 1.4;
+import ::anno::*;
+
+export const string TRANSFORM_NONE = "NONE";
+export const string TRANSFORM_UNORM_VECTOR = "UNORM_VECTOR";
+
+export annotation target_material_model(
+//    string rendering_material_override = "" // if set, the baked material will be rendering using this material, 
+//                                            // otherwise the target itself is used
+);
+
+
+export annotation target_rendering_material(
+    string rendering_material_override = "" // if set, the baked material will be rendering using this material, 
+                                            // otherwise the target itself is used
+);
+
+export annotation target_baked_argument(
+    // the name of the baked texture parameter in the rendering material
+    string baked_name,
+
+    // the name of the constant parameter in the rendering material in case baking was not necessary
+    string constant_name,
+
+    // transformations, like encoding normals into [0,1] range
+    string transform = TRANSFORM_NONE,
+
+    // texture format to bake to
+    string format = "",
+
+    // blending, e.g., based on alpha or replace
+    string blend_mode = ""
+);

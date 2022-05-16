@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:trolltech="urn:trolltech:names:ts:document:1.0">
+  <file original="" datatype="plaintext" source-language="en" target-language="de"><body>
+    <trans-unit id="0">
+      <source xml:space="preserve">Copyright 2022 NVIDIA Corporation. All rights reserved.</source>
+      <target xml:space="preserve"></target>
+      <note from="translator">::anno::copyright_notice(string) noise_worley_glossy
+::anno::copyright_notice(string) noise_perlin_glossy</note>
+    </trans-unit>
+    <trans-unit id="1">
+      <source xml:space="preserve">NVIDIA Corporation</source>
+      <target xml:space="preserve"></target>
+      <note from="translator">::anno::author(string) noise_worley_glossy
+::anno::author(string) noise_perlin_glossy</note>
+    </trans-unit>
+    <trans-unit id="2" approved="yes">
+      <source xml:space="preserve">Dielectric, worley noise textures</source>
+      <target xml:space="preserve">Dielektrikum, Worley-Rauschen-Textur</target>
+      <note from="translator">::anno::display_name(string) noise_worley_glossy</note>
+    </trans-unit>
+    <trans-unit id="3" approved="yes">
+      <source xml:space="preserve">A simple dielectric material showcasing procedural texturing</source>
+      <target xml:space="preserve">Ein einfaches dielektrisches Material mit prozeduraler Textur</target>
+      <note from="translator">::anno::description(string) noise_worley_glossy
+::anno::description(string) noise_perlin_glossy</note>
+    </trans-unit>
+    <trans-unit id="4" approved="yes">
+      <source xml:space="preserve">Coating ior</source>
+      <target xml:space="preserve">Brechungsindex des Lacks</target>
+      <note from="translator">::anno::display_name(string) noise_worley_glossy
+::anno::display_name(string) noise_perlin_glossy</note>
+    </trans-unit>
+    <trans-unit id="5" approved="yes">
+      <source xml:space="preserve">Describes the directional dependence of the reflection. Values around 1.5 are realistic, higher values will increase reflectivity for surfaces facing the observer</source>
+      <target xml:space="preserve">Beschreibt die Abhängigkeit der Reflektions-Richtung. Realistische Werte liegen um 1.5. Höhere Werte erhöhen die Reflektivität in Richtung des Beobachters</target>
+      <note from="translator">::anno::description(string) noise_worley_glossy
+::anno::description(string) noise_perlin_glossy</note>
+    </trans-unit>
+    <trans-unit id="6" approved="yes">
+      <source xml:space="preserve">Color 1</source>
+      <target xml:space="preserve">Farbe 1</target>
+      <note from="translator">::anno::display_name(string) noise_worley_glossy
+::anno::display_name(string) noise_perlin_glossy</note>
+    </trans-unit>
+    <trans-unit id="7" approved="yes">
+      <source xml:space="preserve">Color2</source>
+      <target xml:space="preserve">Farbe 2</target>
+      <note from="translator">::anno::display_name(string) noise_worley_glossy</note>
+    </trans-unit>
+    <trans-unit id="8" approved="yes">
+      <source xml:space="preserve">Scaling factor</source>
+      <target xml:space="preserve">Skalierungs-Faktor</target>
+      <note from="translator">::anno::display_name(string) noise_worley_glossy
+::anno::display_name(string) noise_perlin_glossy</note>
+    </trans-unit>
+    <trans-unit id="9" approved="yes">
+      <source xml:space="preserve">Lower noise threshold</source>
+      <target xml:space="preserve">Unterer Grenzwert des Rauschens</target>
+      <note from="translator">::anno::display_name(string) noise_worley_glossy
+::anno::display_name(string) noise_perlin_glossy</note>
+    </trans-unit>
+    <trans-unit id="10" approved="yes">
+      <source xml:space="preserve">Upper noise threshold</source>
+      <target xml:space="preserve">Oberer Grenzwert des Rauschen</target>
+      <note from="translator">::anno::display_name(string) noise_worley_glossy
+::anno::display_name(string) noise_perlin_glossy</note>
+    </trans-unit>
+    <trans-unit id="11" approved="yes">
+      <source xml:space="preserve">Dielectric, perlin noise textures</source>
+      <target xml:space="preserve">Dielektrikum, Perlin-Rauschen-Textur </target>
+      <note from="translator">::anno::display_name(string) noise_perlin_glossy</note>
+    </trans-unit>
+    <trans-unit id="12" approved="yes">
+      <source xml:space="preserve">Color 2</source>
+      <target xml:space="preserve">Farbe 2</target>
+      <note from="translator">::anno::display_name(string) noise_perlin_glossy</note>
+    </trans-unit>
+    <trans-unit id="13" approved="yes">
+      <source xml:space="preserve">Absolute noise</source>
+      <target xml:space="preserve">Absolutes Rauschen</target>
+      <note from="translator">::anno::display_name(string) noise_perlin_glossy</note>
+    </trans-unit>
+    <trans-unit id="14" approved="yes">
+      <source xml:space="preserve">Detail levels</source>
+      <target xml:space="preserve">Detail-Ebenen</target>
+      <note from="translator">::anno::display_name(string) noise_perlin_glossy</note>
+    </trans-unit>
+    <trans-unit id="15" approved="yes">
+      <source xml:space="preserve">Apply marble function</source>
+      <target xml:space="preserve">Marmorieren</target>
+      <note from="translator">::anno::display_name(string) noise_perlin_glossy</note>
+    </trans-unit>
+    <trans-unit id="16" approved="yes">
+      <source xml:space="preserve">Apply dent function</source>
+      <target xml:space="preserve">Eindellen</target>
+      <note from="translator">::anno::display_name(string) noise_perlin_glossy</note>
+    </trans-unit>
+  </body></file>
+</xliff>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:trolltech="urn:trolltech:names:ts:document:1.0">
+    <file original="" datatype="plaintext" source-language="en" target-language="fr">
+        <body>
+            <trans-unit id="0">
+                <source xml:space="preserve">Copyright 2022 NVIDIA Corporation. All rights reserved.</source>
+                <target xml:space="preserve">Copyright 2022 NVIDIA Corporation. Tous droits réservés.</target>
+                <note from="translator">::anno::copyright_notice(string) measured_metal</note>
+            </trans-unit>
+            <trans-unit id="1">
+                <source xml:space="preserve">NVIDIA Corporation</source>
+                <target xml:space="preserve">NVIDIA Corporation</target>
+                <note from="translator">::anno::author(string) measured_metal</note>
+            </trans-unit>
+            <trans-unit id="2">
+                <source xml:space="preserve">Measured Metal</source>
+                <target xml:space="preserve">Métal Mesuré</target>
+                <note from="translator">::anno::display_name(string) measured_metal</note>
+            </trans-unit>
+            <trans-unit id="3">
+                <source xml:space="preserve">Metalls colored based using their complex IOR's</source>
+                <target xml:space="preserve">Métaux pour lesquels la couleur est déterminée par son indice de réfraction complexe</target>
+                <note from="translator">::anno::description(string) measured_metal</note>
+            </trans-unit>
+            <trans-unit id="4">
+                <source xml:space="preserve">Metal Roughness</source>
+                <target xml:space="preserve">Rugosité du métal</target>
+                <note from="translator">::anno::display_name(string) measured_metal</note>
+            </trans-unit>
+            <trans-unit id="5">
+                <source xml:space="preserve">Increases the overall roughness of the surface</source>
+                <target xml:space="preserve">Augmente la rugosité globale de la surface</target>
+                <note from="translator">::anno::description(string) measured_metal</note>
+            </trans-unit>
+            <trans-unit id="6">
+                <source xml:space="preserve">Kind of metal</source>
+                <target xml:space="preserve">Type de métal</target>
+                <note from="translator">::anno::display_name(string) measured_metal</note>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

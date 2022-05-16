@@ -1,0 +1,14 @@
+mdl 1.4;
+import ::anno::*;
+
+export enum target_baked_semantics
+{
+    None,
+    ALBEDO,
+    NORMAL,
+    TANGENT,
+    ROUGHNESS
+};
+
+export annotation target_material_model();
+export annotation target_baked_argument(string name, target_baked_semantics semantic = None);

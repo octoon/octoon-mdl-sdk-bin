@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:trolltech="urn:trolltech:names:ts:document:1.0">
+  <file original="" datatype="plaintext" source-language="en" target-language="de"><body>
+    <trans-unit id="0">
+      <source xml:space="preserve">Copyright 2022 NVIDIA Corporation. All rights reserved.</source>
+      <target xml:space="preserve"></target>
+      <note from="translator">::anno::copyright_notice(string) measured_metal</note>
+    </trans-unit>
+    <trans-unit id="1">
+      <source xml:space="preserve">NVIDIA Corporation</source>
+      <target xml:space="preserve"></target>
+      <note from="translator">::anno::author(string) measured_metal</note>
+    </trans-unit>
+    <trans-unit id="2" approved="yes">
+      <source xml:space="preserve">Measured Metal</source>
+      <target xml:space="preserve">Vermessenes Metall</target>
+      <note from="translator">::anno::display_name(string) measured_metal</note>
+    </trans-unit>
+    <trans-unit id="3" approved="yes">
+      <source xml:space="preserve">Metalls colored based using their complex IOR&apos;s</source>
+      <target xml:space="preserve">Metalle bei denen die Farbe ueber ihren komplexen Brechungsindex bestimmt wird</target>
+      <note from="translator">::anno::description(string) measured_metal</note>
+    </trans-unit>
+    <trans-unit id="4" approved="yes">
+      <source xml:space="preserve">Metal Roughness</source>
+      <target xml:space="preserve">Metall-Rauheit</target>
+      <note from="translator">::anno::display_name(string) measured_metal</note>
+    </trans-unit>
+    <trans-unit id="5" approved="yes">
+      <source xml:space="preserve">Increases the overall roughness of the surface</source>
+      <target xml:space="preserve">Erhöht die gesamte Oberflächen-Rauheit</target>
+      <note from="translator">::anno::description(string) measured_metal</note>
+    </trans-unit>
+    <trans-unit id="6" approved="yes">
+      <source xml:space="preserve">Kind of metal</source>
+      <target xml:space="preserve">Metall-Sorte</target>
+      <note from="translator">::anno::display_name(string) measured_metal</note>
+    </trans-unit>
+  </body></file>
+</xliff>

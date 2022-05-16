@@ -1,0 +1,172 @@
+mdl 1.4;
+
+import ::base::*;
+import ::df::*;
+import ::math::*;
+import ::tex::*;
+import ::anno::*;
+using .::baking_annotations import *;
+
+// base material model
+export material SimpleDiffuse(
+    color diffuse_color = color(0.0) [[ target_baked_argument("baked_diffuse_color") ]],
+    uniform texture_2d baked_diffuse_color = texture_2d()   // this is used instead of diffuse_color after baking
+)
+[[ target_material_model() ]]
+= let {
+    // texture space 2 contains a simple [0,1] UV space that was used when generating baked texture inputs
+    base::texture_coordinate_info uvw = base::coordinate_source(
+        coordinate_system: base::texture_coordinate_uvw,
+        texture_space: 2
+    );
+
+    base::texture_return baked_diffuse_lookup = base::file_texture(
+                    texture: baked_diffuse_color,
+                    uvw: uvw
+    );
+
+    // if we have a baked value, use it, else use diffuse_color
+    color out_diffuse_color = tex::texture_isvalid(baked_diffuse_color) ? baked_diffuse_lookup.tint : diffuse_color;
+} in material(
+    surface: material_surface(
+        scattering: df::diffuse_reflection_bsdf(
+            tint: out_diffuse_color
+        )
+    )
+);
+
+export material SimpleGlossy(
+    color glossy_color = color(0.0) [[ target_baked_argument("baked_glossy_color") ]],
+    uniform texture_2d baked_glossy_color = texture_2d(),   // this is used instead of diffuse_color after baking
+    float roughness = 3.0 [[ target_baked_argument("baked_roughness", baking_annotations::NORMAL) ]],
+    uniform texture_2d baked_roughness = texture_2d(),      // this is used instead of roughness after baking
+    uniform float some_constant_float = 1.0f [[ ::anno::unused()]], // we do not need to bake uniform variables ...
+    uniform int some_constant_int = 1 [[ ::anno::unused()]]         // ... integration can figure these constants out though
+)
+[[ target_material_model() ]]
+= let {
+    // texture space 2 contains a simple [0,1] UV space that was used when generating baked texture inputs
+    base::texture_coordinate_info uvw = base::coordinate_source(
+        coordinate_system: base::texture_coordinate_uvw,
+        texture_space: 2
+    );
+
+    base::texture_return baked_glossy_lookup = base::file_texture(
+                    texture: baked_glossy_color,
+                    uvw: uvw
+    );
+
+    // if we have a baked value, use it, else use glossy_color
+    color out_glossy_color = tex::texture_isvalid(baked_glossy_color) ? baked_glossy_lookup.tint : glossy_color;
+    
+    base::texture_return baked_roughness_lookup = base::file_texture(
+                    texture: baked_roughness,
+                    uvw: uvw
+    );
+
+    // if we have a baked value, use it, else use roughness
+    float out_roughness = tex::texture_isvalid(baked_roughness) ? float3(baked_roughness_lookup.tint).x : roughness;
+} in material(
+    surface: material_surface(
+        scattering: df::simple_glossy_bsdf(
+            tint: out_glossy_color,
+            roughness_u: out_roughness
+        )
+    )
+);
+
+// arbitrary UV coordinate transform, maps "road space" to [0,1] space
+base::texture_coordinate_info roadSpaceToTextureSpaceUV(base::texture_coordinate_info uvw)
+{
+    return base::texture_coordinate_info(
+        position: float3(
+            x: math::frac(uvw.position.x / 10.0),
+            y: math::frac(uvw.position.y / 10.0),
+            z: uvw.position.z
+        ),
+        tangent_u: uvw.tangent_u,
+        tangent_v: uvw.tangent_v
+    );
+}
+
+// complex material we need to bake
+export material AsphaltOrConcrete(
+    uniform texture_2d asphalt_texture = texture_2d(),
+    uniform texture_2d concrete_texture = texture_2d()
+)
+= let {
+    // texture space 0 contains "world-space" UVs that must be transformed
+    base::texture_coordinate_info uvw = roadSpaceToTextureSpaceUV(
+        base::coordinate_source(
+            coordinate_system: base::texture_coordinate_uvw,
+            texture_space: 0
+        )
+    );
+
+    // texture space 1 contains the blend factor
+    // (this would likely come in as a vertex color attribute in practice)
+    base::texture_coordinate_info uvw_blend = base::coordinate_source(
+        coordinate_system: base::texture_coordinate_uvw,
+        texture_space: 1
+    );
+
+    float blend_factor = uvw_blend.position.x;
+
+    base::texture_return asphalt_lookup = base::file_texture(
+                    texture: asphalt_texture,
+                    uvw: uvw
+    );
+
+    base::texture_return concrete_lookup = base::file_texture(
+                        texture: concrete_texture,
+                        uvw: uvw
+    );
+
+    color diffuse = math::lerp(asphalt_lookup.tint, concrete_lookup.tint, blend_factor);
+} in SimpleDiffuse(
+    diffuse_color: diffuse
+);
+
+// complex material we need to bake
+export material AsphaltOrConcrete_SimpleGlossy(
+    uniform texture_2d asphalt_texture = texture_2d(),
+    uniform texture_2d concrete_texture = texture_2d()
+)
+= let {
+    // texture space 0 contains "world-space" UVs that must be transformed
+    base::texture_coordinate_info uvw = roadSpaceToTextureSpaceUV(
+        base::coordinate_source(
+            coordinate_system: base::texture_coordinate_uvw,
+            texture_space: 0
+        )
+    );
+
+    // texture space 1 contains the blend factor
+    // (this would likely come in as a vertex color attribute in practice)
+    base::texture_coordinate_info uvw_blend = base::coordinate_source(
+        coordinate_system: base::texture_coordinate_uvw,
+        texture_space: 1
+    );
+
+    float blend_factor = uvw_blend.position.x;
+
+    base::texture_return asphalt_lookup = base::file_texture(
+                    texture: asphalt_texture,
+                    uvw: uvw
+    );
+
+    base::texture_return concrete_lookup = base::file_texture(
+                        texture: concrete_texture,
+                        uvw: uvw
+    );
+
+    color diffuse = math::lerp(asphalt_lookup.tint, concrete_lookup.tint, blend_factor);
+    
+    float roughness = math::sin(uvw.position.y * 2 * math::PI) * 2 + 1;
+} in SimpleGlossy(
+    glossy_color: diffuse,
+    roughness: roughness,
+    some_constant_float: 0.3f,
+    some_constant_int: 42
+);
+

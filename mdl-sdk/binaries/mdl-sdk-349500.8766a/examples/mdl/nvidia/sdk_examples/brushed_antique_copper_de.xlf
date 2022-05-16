@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:trolltech="urn:trolltech:names:ts:document:1.0">
+  <file original="" datatype="plaintext" source-language="en" target-language="de"><body>
+    <trans-unit id="0">
+      <source xml:space="preserve">Copyright 2022 NVIDIA Corporation. All rights reserved.</source>
+      <target xml:space="preserve"></target>
+      <note from="translator">::anno::copyright_notice(string)</note>
+    </trans-unit>
+    <trans-unit id="1">
+      <source xml:space="preserve">NVIDIA corporation</source>
+      <target xml:space="preserve"></target>
+      <note from="translator">::anno::author(string)</note>
+    </trans-unit>
+    <trans-unit id="2" approved="yes">
+      <source xml:space="preserve">Brushed Antique Copper</source>
+      <target xml:space="preserve">Gebürstetes, antikes Kupfer</target>
+      <note from="translator">::anno::display_name(string)</note>
+    </trans-unit>
+    <trans-unit id="3" approved="yes">
+      <source xml:space="preserve">Metal Brightness</source>
+      <target xml:space="preserve">Metall-Helligkeit</target>
+      <note from="translator">::anno::display_name(string)</note>
+    </trans-unit>
+    <trans-unit id="4" approved="yes">
+      <source xml:space="preserve">Increases the overall brightness of the surface</source>
+      <target xml:space="preserve">Die Helligkeit der Oberfläche erhöhen</target>
+      <note from="translator">::anno::description(string)</note>
+    </trans-unit>
+    <trans-unit id="5" approved="yes">
+      <source xml:space="preserve">Appearance</source>
+      <target xml:space="preserve">Aussehen</target>
+      <note from="translator">::anno::in_group(string)</note>
+    </trans-unit>
+    <trans-unit id="6" approved="yes">
+      <source xml:space="preserve">Metal Roughness</source>
+      <target xml:space="preserve">Metall-Rauheit</target>
+      <note from="translator">::anno::display_name(string)</note>
+    </trans-unit>
+    <trans-unit id="7" approved="yes">
+      <source xml:space="preserve">Increases the overall roughness of the surface</source>
+      <target xml:space="preserve">Die Rauheit der Oberfläche erhöhen</target>
+      <note from="translator">::anno::description(string)</note>
+    </trans-unit>
+    <trans-unit id="8" approved="yes">
+      <source xml:space="preserve">Bump Strength</source>
+      <target xml:space="preserve">Bump-Stärke</target>
+      <note from="translator">::anno::display_name(string)</note>
+    </trans-unit>
+    <trans-unit id="9" approved="yes">
+      <source xml:space="preserve">The strength of the bumpmap of the diamond pattern</source>
+      <target xml:space="preserve">Die Bump-Stärke des Rautenmusters</target>
+      <note from="translator">::anno::description(string)</note>
+    </trans-unit>
+    <trans-unit id="10" approved="yes">
+      <source xml:space="preserve">Translate</source>
+      <target xml:space="preserve">Translation</target>
+      <note from="translator">::anno::display_name(string)</note>
+    </trans-unit>
+    <trans-unit id="11" approved="yes">
+      <source xml:space="preserve">Controls the position of the texture</source>
+      <target xml:space="preserve">Legt die Position der Textur fest</target>
+      <note from="translator">::anno::description(string)</note>
+    </trans-unit>
+    <trans-unit id="12" approved="yes">
+      <source xml:space="preserve">Transform</source>
+      <target xml:space="preserve">Transformation</target>
+      <note from="translator">::anno::in_group(string)</note>
+    </trans-unit>
+    <trans-unit id="13" approved="yes">
+      <source xml:space="preserve">Rotate</source>
+      <target xml:space="preserve">Rotation</target>
+      <note from="translator">::anno::display_name(string)</note>
+    </trans-unit>
+    <trans-unit id="14" approved="yes">
+      <source xml:space="preserve">Rotates angle of the texture in degrees</source>
+      <target xml:space="preserve">Rotationswinkel der Textur in Grad</target>
+      <note from="translator">::anno::description(string)</note>
+    </trans-unit>
+    <trans-unit id="15" approved="yes">
+      <source xml:space="preserve">Scale</source>
+      <target xml:space="preserve">Skalierung</target>
+      <note from="translator">::anno::display_name(string)</note>
+    </trans-unit>
+    <trans-unit id="16" approved="yes">
+      <source xml:space="preserve">Larger numbers increase the size</source>
+      <target xml:space="preserve">Hohe Werte führen zu Vergrösserungen</target>
+      <note from="translator">::anno::description(string)</note>
+    </trans-unit>
+    <trans-unit id="17" approved="yes">
+      <source xml:space="preserve">UV Space Index</source>
+      <target xml:space="preserve">UV-Index</target>
+      <note from="translator">::anno::display_name(string)</note>
+    </trans-unit>
+    <trans-unit id="18" approved="yes">
+      <source xml:space="preserve">UV Space Index</source>
+      <target xml:space="preserve">UV-Index</target>
+      <note from="translator">::anno::description(string)</note>
+    </trans-unit>
+    <trans-unit id="19" approved="yes">
+      <source xml:space="preserve">Advanced</source>
+      <target xml:space="preserve">Erweitert</target>
+      <note from="translator">::anno::in_group(string)</note>
+    </trans-unit>
+  </body></file>
+</xliff>

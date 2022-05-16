@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:trolltech="urn:trolltech:names:ts:document:1.0">
+  <file original="" datatype="plaintext" source-language="en" target-language="de"><body>
+    <trans-unit id="0">
+      <source xml:space="preserve">Copyright 2022 NVIDIA Corporation. All rights reserved.</source>
+      <target xml:space="preserve"></target>
+      <note from="translator">::anno::copyright_notice(string) carpaint_red
+::anno::copyright_notice(string) carpaint_green
+::anno::copyright_notice(string) carpaint_blue</note>
+    </trans-unit>
+    <trans-unit id="1">
+      <source xml:space="preserve">NVIDIA Corporation</source>
+      <target xml:space="preserve"></target>
+      <note from="translator">::anno::author(string) carpaint_red
+::anno::author(string) carpaint_green
+::anno::author(string) carpaint_blue</note>
+    </trans-unit>
+    <trans-unit id="2" approved="yes">
+      <source xml:space="preserve">Measured carpaint, red</source>
+      <target xml:space="preserve">Roter, vermessener Autolack</target>
+      <note from="translator">::anno::display_name(string) carpaint_red</note>
+    </trans-unit>
+    <trans-unit id="3" approved="yes">
+      <source xml:space="preserve">The measured brdf of a physical carpaint combined with an analytical clear coat component</source>
+      <target xml:space="preserve">Die vermessene BRDF eines Autolacks kombiniert mit einer Klarlack-Komponente</target>
+      <note from="translator">::anno::description(string) carpaint_red
+::anno::description(string) carpaint_green
+::anno::description(string) carpaint_blue</note>
+    </trans-unit>
+    <trans-unit id="4" approved="yes">
+      <source xml:space="preserve">Coat ior</source>
+      <target xml:space="preserve">Brechungsindex der Schicht</target>
+      <note from="translator">::anno::display_name(string) carpaint_red
+::anno::display_name(string) carpaint_green
+::anno::display_name(string) carpaint_blue</note>
+    </trans-unit>
+    <trans-unit id="5" approved="yes">
+      <source xml:space="preserve">Describes the directional dependence of the reflection of an analytical clear coat component.</source>
+      <target xml:space="preserve">Beschreibt die Richtungsabhängigkeit der Reflektivität der Klarlack-Komponente</target>
+      <note from="translator">::anno::description(string) carpaint_red
+::anno::description(string) carpaint_green
+::anno::description(string) carpaint_blue</note>
+    </trans-unit>
+    <trans-unit id="6" approved="yes">
+      <source xml:space="preserve">Measured carpaint, green</source>
+      <target xml:space="preserve">Grüner, vermessener Autolack</target>
+      <note from="translator">::anno::display_name(string) carpaint_green</note>
+    </trans-unit>
+    <trans-unit id="8" approved="yes">
+      <source xml:space="preserve">Measured carpaint, blue</source>
+      <target xml:space="preserve">Blauer, vermessener Autolack</target>
+      <note from="translator">::anno::display_name(string) carpaint_blue</note>
+    </trans-unit>
+  </body></file>
+</xliff>

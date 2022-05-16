@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:trolltech="urn:trolltech:names:ts:document:1.0">
+    <file original="" datatype="plaintext" source-language="en" target-language="fr">
+        <body>
+            <trans-unit id="0">
+                <source xml:space="preserve">Copyright 2022 NVIDIA Corporation. All rights reserved.</source>
+                <target xml:space="preserve">Copyright 2022 NVIDIA Corporation. Tous droits réservés.</target>
+                <note from="translator">::anno::copyright_notice(string) noise_worley_glossy
+::anno::copyright_notice(string) noise_perlin_glossy</note>
+            </trans-unit>
+            <trans-unit id="1">
+                <source xml:space="preserve">NVIDIA Corporation</source>
+                <target xml:space="preserve">NVIDIA Corporation</target>
+                <note from="translator">::anno::author(string) noise_worley_glossy
+::anno::author(string) noise_perlin_glossy</note>
+            </trans-unit>
+            <trans-unit id="2">
+                <source xml:space="preserve">Dielectric, worley noise textures</source>
+                <target xml:space="preserve">Textures de bruit de Worley diélectrique</target>
+                <note from="translator">::anno::display_name(string) noise_worley_glossy</note>
+            </trans-unit>
+            <trans-unit id="3">
+                <source xml:space="preserve">A simple dielectric material showcasing procedural texturing</source>
+                <target xml:space="preserve">Un simple matériau diélectrique montrant la texturation procédurale</target>
+                <note from="translator">::anno::description(string) noise_worley_glossy
+::anno::description(string) noise_perlin_glossy</note>
+            </trans-unit>
+            <trans-unit id="4">
+                <source xml:space="preserve">Coating ior</source>
+                <target xml:space="preserve">Indice de réfraction du revêtement</target>
+                <note from="translator">::anno::display_name(string) noise_worley_glossy
+::anno::display_name(string) noise_perlin_glossy</note>
+            </trans-unit>
+            <trans-unit id="5">
+                <source xml:space="preserve">Describes the directional dependence of the reflection. Values around 1.5 are realistic, higher values will increase reflectivity for surfaces facing the observer</source>
+                <target xml:space="preserve">Décrit la dépendance directionnelle de la réflexion. Les valeurs autour de 1,5 sont réalistes, des valeurs plus élevées augmenteront la réflectivité des surfaces faisant face à l'observateur</target>
+                <note from="translator">::anno::description(string) noise_worley_glossy
+::anno::description(string) noise_perlin_glossy</note>
+            </trans-unit>
+            <trans-unit id="6">
+                <source xml:space="preserve">Color 1</source>
+                <target xml:space="preserve">Couleur 1</target>
+                <note from="translator">::anno::display_name(string) noise_worley_glossy
+::anno::display_name(string) noise_perlin_glossy</note>
+            </trans-unit>
+            <trans-unit id="7">
+                <source xml:space="preserve">Color2</source>
+                <target xml:space="preserve">Couleur 2</target>
+                <note from="translator">::anno::display_name(string) noise_worley_glossy</note>
+            </trans-unit>
+            <trans-unit id="8">
+                <source xml:space="preserve">Scaling factor</source>
+                <target xml:space="preserve">Facteur d'échelle</target>
+                <note from="translator">::anno::display_name(string) noise_worley_glossy
+::anno::display_name(string) noise_perlin_glossy</note>
+            </trans-unit>
+            <trans-unit id="9">
+                <source xml:space="preserve">Lower noise threshold</source>
+                <target xml:space="preserve">Seuil de bruit inférieur</target>
+                <note from="translator">::anno::display_name(string) noise_worley_glossy
+::anno::display_name(string) noise_perlin_glossy</note>
+            </trans-unit>
+            <trans-unit id="10">
+                <source xml:space="preserve">Upper noise threshold</source>
+                <target xml:space="preserve">Seuil de bruit supérieur</target>
+                <note from="translator">::anno::display_name(string) noise_worley_glossy
+::anno::display_name(string) noise_perlin_glossy</note>
+            </trans-unit>
+            <trans-unit id="11">
+                <source xml:space="preserve">Dielectric, perlin noise textures</source>
+                <target xml:space="preserve">Textures diélectriques à bruit de Perlin</target>
+                <note from="translator">::anno::display_name(string) noise_perlin_glossy</note>
+            </trans-unit>
+            <trans-unit id="12">
+                <source xml:space="preserve">Color 2</source>
+                <target xml:space="preserve">Couleur 2</target>
+                <note from="translator">::anno::display_name(string) noise_perlin_glossy</note>
+            </trans-unit>
+            <trans-unit id="13">
+                <source xml:space="preserve">Absolute noise</source>
+                <target xml:space="preserve">Bruit absolu</target>
+                <note from="translator">::anno::display_name(string) noise_perlin_glossy</note>
+            </trans-unit>
+            <trans-unit id="14">
+                <source xml:space="preserve">Detail levels</source>
+                <target xml:space="preserve">Niveaux de détail</target>
+                <note from="translator">::anno::display_name(string) noise_perlin_glossy</note>
+            </trans-unit>
+            <trans-unit id="15">
+                <source xml:space="preserve">Apply marble function</source>
+                <target xml:space="preserve">Appliquer la fonction marbre</target>
+                <note from="translator">::anno::display_name(string) noise_perlin_glossy</note>
+            </trans-unit>
+            <trans-unit id="16">
+                <source xml:space="preserve">Apply dent function</source>
+                <target xml:space="preserve">Appliquer la fonction de bosselure</target>
+                <note from="translator">::anno::display_name(string) noise_perlin_glossy</note>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

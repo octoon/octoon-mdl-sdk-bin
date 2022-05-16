@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:trolltech="urn:trolltech:names:ts:document:1.0">
+    <file original="" datatype="plaintext" source-language="en" target-language="fr">
+        <body>
+            <trans-unit id="0">
+                <source xml:space="preserve">Copyright 2022 NVIDIA Corporation. All rights reserved.</source>
+                <target xml:space="preserve">Copyright 2022 NVIDIA Corporation. Tous droits réservés.</target>
+                <note from="translator">::anno::copyright_notice(string) carbon_composite</note>
+            </trans-unit>
+            <trans-unit id="1">
+                <source xml:space="preserve">NVIDIA Corporation</source>
+                <target xml:space="preserve">NVIDIA Corporation</target>
+                <note from="translator">::anno::author(string) carbon_composite</note>
+            </trans-unit>
+            <trans-unit id="2">
+                <source xml:space="preserve">Carbon fibre composite</source>
+                <target xml:space="preserve">Composite en fibre de carbone</target>
+                <note from="translator">::anno::display_name(string) carbon_composite</note>
+            </trans-unit>
+            <trans-unit id="3">
+                <source xml:space="preserve">IOR</source>
+                <target xml:space="preserve">Indice de réfraction</target>
+                <note from="translator">::anno::display_name(string) carbon_composite</note>
+            </trans-unit>
+            <trans-unit id="4">
+                <source xml:space="preserve">Top coat</source>
+                <target xml:space="preserve">Top coat</target>
+                <note from="translator">::anno::in_group(string) carbon_composite
+::anno::in_group(string) carbon_composite
+::anno::in_group(string) carbon_composite
+::anno::in_group(string) carbon_composite</note>
+            </trans-unit>
+            <trans-unit id="5">
+                <source xml:space="preserve">Micro roughness</source>
+                <target xml:space="preserve">Micro rugosité</target>
+                <note from="translator">::anno::display_name(string) carbon_composite
+::anno::display_name(string) carbon_composite</note>
+            </trans-unit>
+            <trans-unit id="6">
+                <source xml:space="preserve">Orange peel strength</source>
+                <target xml:space="preserve">Intensité de l'écorce d'orange</target>
+                <note from="translator">::anno::display_name(string) carbon_composite</note>
+            </trans-unit>
+            <trans-unit id="7">
+                <source xml:space="preserve">Orange peel size</source>
+                <target xml:space="preserve">Taille de l'écorce d'orange</target>
+                <note from="translator">::anno::display_name(string) carbon_composite</note>
+            </trans-unit>
+            <trans-unit id="8">
+                <source xml:space="preserve">Orientation texture</source>
+                <target xml:space="preserve">Orientation de la texture</target>
+                <note from="translator">::anno::display_name(string) carbon_composite</note>
+            </trans-unit>
+            <trans-unit id="9">
+                <source xml:space="preserve">Carbon fibres</source>
+                <target xml:space="preserve">Fibres de carbone</target>
+                <note from="translator">::anno::in_group(string) carbon_composite
+::anno::in_group(string) carbon_composite
+::anno::in_group(string) carbon_composite
+::anno::in_group(string) carbon_composite
+::anno::in_group(string) carbon_composite
+::anno::in_group(string) carbon_composite
+::anno::in_group(string) carbon_composite</note>
+            </trans-unit>
+            <trans-unit id="10">
+                <source xml:space="preserve">Bump texture</source>
+                <target xml:space="preserve">Texture bump</target>
+                <note from="translator">::anno::display_name(string) carbon_composite</note>
+            </trans-unit>
+            <trans-unit id="11">
+                <source xml:space="preserve">Reflectivity texture</source>
+                <target xml:space="preserve">Texture de réflectivité</target>
+                <note from="translator">::anno::display_name(string) carbon_composite</note>
+            </trans-unit>
+            <trans-unit id="12">
+                <source xml:space="preserve">Reflectivity</source>
+                <target xml:space="preserve">Réflectivité</target>
+                <note from="translator">::anno::display_name(string) carbon_composite</note>
+            </trans-unit>
+            <trans-unit id="13">
+                <source xml:space="preserve">Bump scale</source>
+                <target xml:space="preserve">Échelle de bump</target>
+                <note from="translator">::anno::display_name(string) carbon_composite</note>
+            </trans-unit>
+            <trans-unit id="14">
+                <source xml:space="preserve">Anisotropy</source>
+                <target xml:space="preserve">Anisotropie</target>
+                <note from="translator">::anno::display_name(string) carbon_composite</note>
+            </trans-unit>
+            <trans-unit id="15">
+                <source xml:space="preserve">Texture repetition</source>
+                <target xml:space="preserve">Répétition de la texture</target>
+                <note from="translator">::anno::display_name(string) carbon_composite</note>
+            </trans-unit>
+            <trans-unit id="16">
+                <source xml:space="preserve">Other</source>
+                <target xml:space="preserve">Autre</target>
+                <note from="translator">::anno::in_group(string) carbon_composite</note>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>
