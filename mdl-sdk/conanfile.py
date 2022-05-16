@@ -9,7 +9,7 @@ required_conan_version = ">=1.35.0"
 
 class MdlSdkConan(ConanFile):
     name = "mdl-sdk"
-    version = "2021.1.2"
+    version = "2021.01.02"
     description = "<Description of MdlSdk here>"
     url = "None"
     license = "None"
@@ -86,4 +86,5 @@ class MdlSdkConan(ConanFile):
 
     def package_info(self):
         # self.cpp_info.libs = tools.collect_libs(self)
-        self.cpp_info.libs = ["mdl-sdk"]
+        # self.cpp_info.libs = ["mdl-sdk"]
+        self.cpp_info.libs = []
